@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.PatientSetMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.PatientSet" >
+    <id column="p_id" property="pId" jdbcType="BIGINT" />
+    <result column="patientid" property="patientid" jdbcType="VARCHAR" />
+    <result column="visitid" property="visitid" jdbcType="VARCHAR" />
+    <result column="itemname" property="itemname" jdbcType="VARCHAR" />
+    <result column="itemvalue" property="itemvalue" jdbcType="VARCHAR" />
+    <result column="itemtype" property="itemtype" jdbcType="VARCHAR" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+    <result column="groupid" property="groupid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    p_id, patientid, visitid, itemname, itemvalue, itemtype, studyid, groupid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.PatientSetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PATIENTSET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from PATIENTSET
+    where p_id = #{pId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from PATIENTSET
+    where p_id = #{pId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.PatientSetExample" >
+    delete from PATIENTSET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.PatientSet" >
+    insert into PATIENTSET (p_id, patientid, visitid, 
+      itemname, itemvalue, itemtype, 
+      studyid, groupid)
+    values (#{pId,jdbcType=BIGINT}, #{patientid,jdbcType=VARCHAR}, #{visitid,jdbcType=VARCHAR}, 
+      #{itemname,jdbcType=VARCHAR}, #{itemvalue,jdbcType=VARCHAR}, #{itemtype,jdbcType=VARCHAR}, 
+      #{studyid,jdbcType=VARCHAR}, #{groupid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.PatientSet" >
+    insert into PATIENTSET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="patientid != null" >
+        patientid,
+      </if>
+      <if test="visitid != null" >
+        visitid,
+      </if>
+      <if test="itemname != null" >
+        itemname,
+      </if>
+      <if test="itemvalue != null" >
+        itemvalue,
+      </if>
+      <if test="itemtype != null" >
+        itemtype,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=BIGINT},
+      </if>
+      <if test="patientid != null" >
+        #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitid != null" >
+        #{visitid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemvalue != null" >
+        #{itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null" >
+        #{itemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.PatientSetExample" resultType="java.lang.Integer" >
+    select count(*) from PATIENTSET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update PATIENTSET
+    <set >
+      <if test="record.pId != null" >
+        p_id = #{record.pId,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientid != null" >
+        patientid = #{record.patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitid != null" >
+        visitid = #{record.visitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemname != null" >
+        itemname = #{record.itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemvalue != null" >
+        itemvalue = #{record.itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemtype != null" >
+        itemtype = #{record.itemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update PATIENTSET
+    set p_id = #{record.pId,jdbcType=BIGINT},
+      patientid = #{record.patientid,jdbcType=VARCHAR},
+      visitid = #{record.visitid,jdbcType=VARCHAR},
+      itemname = #{record.itemname,jdbcType=VARCHAR},
+      itemvalue = #{record.itemvalue,jdbcType=VARCHAR},
+      itemtype = #{record.itemtype,jdbcType=VARCHAR},
+      studyid = #{record.studyid,jdbcType=VARCHAR},
+      groupid = #{record.groupid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.PatientSet" >
+    update PATIENTSET
+    <set >
+      <if test="patientid != null" >
+        patientid = #{patientid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitid != null" >
+        visitid = #{visitid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        itemname = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemvalue != null" >
+        itemvalue = #{itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null" >
+        itemtype = #{itemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        studyid = #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.PatientSet" >
+    update PATIENTSET
+    set patientid = #{patientid,jdbcType=VARCHAR},
+      visitid = #{visitid,jdbcType=VARCHAR},
+      itemname = #{itemname,jdbcType=VARCHAR},
+      itemvalue = #{itemvalue,jdbcType=VARCHAR},
+      itemtype = #{itemtype,jdbcType=VARCHAR},
+      studyid = #{studyid,jdbcType=VARCHAR},
+      groupid = #{groupid,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+</mapper>

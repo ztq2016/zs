@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ExportPlanVariablesExtendsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    <id column="link_id" property="linkId" jdbcType="INTEGER" />
+    <result column="exp_id" property="expId" jdbcType="INTEGER" />
+    <result column="variable_id" property="variableId" jdbcType="VARCHAR" />
+    <result column="variable_other_name" property="variableOtherName" jdbcType="VARCHAR" />
+    <result column="variable_name" property="variableName" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariables">
+  insert into export_plan_variables (exp_id,variable_id,variable_other_name,variable_name) values
+  	<foreach collection="list" item="ep" separator="," close=";">
+  	(#{ep.expId,jdbcType=INTEGER},#{ep.variableId,jdbcType=VARCHAR},#{ep.variableOtherName,jdbcType=VARCHAR},#{ep.variableName,jdbcType=VARCHAR})
+  	</foreach>
+  </insert>
+</mapper>

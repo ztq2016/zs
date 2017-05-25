@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ExportContentsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ExportContents" >
+    <id column="ec_id" property="ecId" jdbcType="INTEGER" />
+    <result column="ec_name" property="ecName" jdbcType="VARCHAR" />
+    <result column="ec_es_code" property="ecEsCode" jdbcType="VARCHAR" />
+    <result column="ec_father_id" property="ecFatherId" jdbcType="INTEGER" />
+    <result column="ec_level" property="ecLevel" jdbcType="VARCHAR" />
+    <result column="ec_order" property="ecOrder" jdbcType="INTEGER" />
+    <result column="ec_pycode" property="ecPycode" jdbcType="VARCHAR" />
+    <result column="ec_other" property="ecOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ec_id, ec_name, ec_es_code, ec_father_id, ec_level, ec_order, ec_pycode, ec_other
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.ExportContentsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from export_contents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from export_contents
+    where ec_id = #{ecId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from export_contents
+    where ec_id = #{ecId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.ExportContentsExample" >
+    delete from export_contents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.ExportContents" >
+    insert into export_contents (ec_id, ec_name, ec_es_code, 
+      ec_father_id, ec_level, ec_order, 
+      ec_pycode, ec_other)
+    values (#{ecId,jdbcType=INTEGER}, #{ecName,jdbcType=VARCHAR}, #{ecEsCode,jdbcType=VARCHAR}, 
+      #{ecFatherId,jdbcType=INTEGER}, #{ecLevel,jdbcType=VARCHAR}, #{ecOrder,jdbcType=INTEGER}, 
+      #{ecPycode,jdbcType=VARCHAR}, #{ecOther,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.ExportContents" >
+    insert into export_contents
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ecId != null" >
+        ec_id,
+      </if>
+      <if test="ecName != null" >
+        ec_name,
+      </if>
+      <if test="ecEsCode != null" >
+        ec_es_code,
+      </if>
+      <if test="ecFatherId != null" >
+        ec_father_id,
+      </if>
+      <if test="ecLevel != null" >
+        ec_level,
+      </if>
+      <if test="ecOrder != null" >
+        ec_order,
+      </if>
+      <if test="ecPycode != null" >
+        ec_pycode,
+      </if>
+      <if test="ecOther != null" >
+        ec_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ecId != null" >
+        #{ecId,jdbcType=INTEGER},
+      </if>
+      <if test="ecName != null" >
+        #{ecName,jdbcType=VARCHAR},
+      </if>
+      <if test="ecEsCode != null" >
+        #{ecEsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ecFatherId != null" >
+        #{ecFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="ecLevel != null" >
+        #{ecLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="ecOrder != null" >
+        #{ecOrder,jdbcType=INTEGER},
+      </if>
+      <if test="ecPycode != null" >
+        #{ecPycode,jdbcType=VARCHAR},
+      </if>
+      <if test="ecOther != null" >
+        #{ecOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.ExportContentsExample" resultType="java.lang.Integer" >
+    select count(*) from export_contents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update export_contents
+    <set >
+      <if test="record.ecId != null" >
+        ec_id = #{record.ecId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecName != null" >
+        ec_name = #{record.ecName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecEsCode != null" >
+        ec_es_code = #{record.ecEsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecFatherId != null" >
+        ec_father_id = #{record.ecFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecLevel != null" >
+        ec_level = #{record.ecLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecOrder != null" >
+        ec_order = #{record.ecOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.ecPycode != null" >
+        ec_pycode = #{record.ecPycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ecOther != null" >
+        ec_other = #{record.ecOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update export_contents
+    set ec_id = #{record.ecId,jdbcType=INTEGER},
+      ec_name = #{record.ecName,jdbcType=VARCHAR},
+      ec_es_code = #{record.ecEsCode,jdbcType=VARCHAR},
+      ec_father_id = #{record.ecFatherId,jdbcType=INTEGER},
+      ec_level = #{record.ecLevel,jdbcType=VARCHAR},
+      ec_order = #{record.ecOrder,jdbcType=INTEGER},
+      ec_pycode = #{record.ecPycode,jdbcType=VARCHAR},
+      ec_other = #{record.ecOther,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.ExportContents" >
+    update export_contents
+    <set >
+      <if test="ecName != null" >
+        ec_name = #{ecName,jdbcType=VARCHAR},
+      </if>
+      <if test="ecEsCode != null" >
+        ec_es_code = #{ecEsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ecFatherId != null" >
+        ec_father_id = #{ecFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="ecLevel != null" >
+        ec_level = #{ecLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="ecOrder != null" >
+        ec_order = #{ecOrder,jdbcType=INTEGER},
+      </if>
+      <if test="ecPycode != null" >
+        ec_pycode = #{ecPycode,jdbcType=VARCHAR},
+      </if>
+      <if test="ecOther != null" >
+        ec_other = #{ecOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ec_id = #{ecId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.ExportContents" >
+    update export_contents
+    set ec_name = #{ecName,jdbcType=VARCHAR},
+      ec_es_code = #{ecEsCode,jdbcType=VARCHAR},
+      ec_father_id = #{ecFatherId,jdbcType=INTEGER},
+      ec_level = #{ecLevel,jdbcType=VARCHAR},
+      ec_order = #{ecOrder,jdbcType=INTEGER},
+      ec_pycode = #{ecPycode,jdbcType=VARCHAR},
+      ec_other = #{ecOther,jdbcType=VARCHAR}
+    where ec_id = #{ecId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ModelIstestResultMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ModelIstestResult" >
+    <id column="istt_id" property="isttId" jdbcType="INTEGER" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+    <result column="var_equal_t" property="varEqualT" jdbcType="VARCHAR" />
+    <result column="var_equal_sig" property="varEqualSig" jdbcType="VARCHAR" />
+    <result column="var_equal_inf" property="varEqualInf" jdbcType="VARCHAR" />
+    <result column="var_equal_sup" property="varEqualSup" jdbcType="VARCHAR" />
+    <result column="var_unequal_t" property="varUnequalT" jdbcType="VARCHAR" />
+    <result column="var_unequal_sig" property="varUnequalSig" jdbcType="VARCHAR" />
+    <result column="var_unequal_inf" property="varUnequalInf" jdbcType="VARCHAR" />
+    <result column="var_unequal_sup" property="varUnequalSup" jdbcType="VARCHAR" />
+    <result column="conf_level" property="confLevel" jdbcType="VARCHAR" />
+    <result column="variable_id" property="variableId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    istt_id, studyid, var_equal_t, var_equal_sig, var_equal_inf, var_equal_sup, var_unequal_t, 
+    var_unequal_sig, var_unequal_inf, var_unequal_sup, conf_level, variable_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.ModelIstestResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model_isttest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from model_isttest_result
+    where istt_id = #{isttId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from model_isttest_result
+    where istt_id = #{isttId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.ModelIstestResultExample" >
+    delete from model_isttest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.ModelIstestResult" >
+    insert into model_isttest_result (istt_id, studyid, var_equal_t, 
+      var_equal_sig, var_equal_inf, var_equal_sup, 
+      var_unequal_t, var_unequal_sig, var_unequal_inf, 
+      var_unequal_sup, conf_level, variable_id
+      )
+    values (#{isttId,jdbcType=INTEGER}, #{studyid,jdbcType=VARCHAR}, #{varEqualT,jdbcType=VARCHAR}, 
+      #{varEqualSig,jdbcType=VARCHAR}, #{varEqualInf,jdbcType=VARCHAR}, #{varEqualSup,jdbcType=VARCHAR}, 
+      #{varUnequalT,jdbcType=VARCHAR}, #{varUnequalSig,jdbcType=VARCHAR}, #{varUnequalInf,jdbcType=VARCHAR}, 
+      #{varUnequalSup,jdbcType=VARCHAR}, #{confLevel,jdbcType=VARCHAR}, #{variableId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.ModelIstestResult" >
+    insert into model_isttest_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="isttId != null" >
+        istt_id,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+      <if test="varEqualT != null" >
+        var_equal_t,
+      </if>
+      <if test="varEqualSig != null" >
+        var_equal_sig,
+      </if>
+      <if test="varEqualInf != null" >
+        var_equal_inf,
+      </if>
+      <if test="varEqualSup != null" >
+        var_equal_sup,
+      </if>
+      <if test="varUnequalT != null" >
+        var_unequal_t,
+      </if>
+      <if test="varUnequalSig != null" >
+        var_unequal_sig,
+      </if>
+      <if test="varUnequalInf != null" >
+        var_unequal_inf,
+      </if>
+      <if test="varUnequalSup != null" >
+        var_unequal_sup,
+      </if>
+      <if test="confLevel != null" >
+        conf_level,
+      </if>
+      <if test="variableId != null" >
+        variable_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="isttId != null" >
+        #{isttId,jdbcType=INTEGER},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualT != null" >
+        #{varEqualT,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualSig != null" >
+        #{varEqualSig,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualInf != null" >
+        #{varEqualInf,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualSup != null" >
+        #{varEqualSup,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalT != null" >
+        #{varUnequalT,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalSig != null" >
+        #{varUnequalSig,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalInf != null" >
+        #{varUnequalInf,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalSup != null" >
+        #{varUnequalSup,jdbcType=VARCHAR},
+      </if>
+      <if test="confLevel != null" >
+        #{confLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="variableId != null" >
+        #{variableId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.ModelIstestResultExample" resultType="java.lang.Integer" >
+    select count(*) from model_isttest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update model_isttest_result
+    <set >
+      <if test="record.isttId != null" >
+        istt_id = #{record.isttId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varEqualT != null" >
+        var_equal_t = #{record.varEqualT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varEqualSig != null" >
+        var_equal_sig = #{record.varEqualSig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varEqualInf != null" >
+        var_equal_inf = #{record.varEqualInf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varEqualSup != null" >
+        var_equal_sup = #{record.varEqualSup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varUnequalT != null" >
+        var_unequal_t = #{record.varUnequalT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varUnequalSig != null" >
+        var_unequal_sig = #{record.varUnequalSig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varUnequalInf != null" >
+        var_unequal_inf = #{record.varUnequalInf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varUnequalSup != null" >
+        var_unequal_sup = #{record.varUnequalSup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confLevel != null" >
+        conf_level = #{record.confLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.variableId != null" >
+        variable_id = #{record.variableId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update model_isttest_result
+    set istt_id = #{record.isttId,jdbcType=INTEGER},
+      studyid = #{record.studyid,jdbcType=VARCHAR},
+      var_equal_t = #{record.varEqualT,jdbcType=VARCHAR},
+      var_equal_sig = #{record.varEqualSig,jdbcType=VARCHAR},
+      var_equal_inf = #{record.varEqualInf,jdbcType=VARCHAR},
+      var_equal_sup = #{record.varEqualSup,jdbcType=VARCHAR},
+      var_unequal_t = #{record.varUnequalT,jdbcType=VARCHAR},
+      var_unequal_sig = #{record.varUnequalSig,jdbcType=VARCHAR},
+      var_unequal_inf = #{record.varUnequalInf,jdbcType=VARCHAR},
+      var_unequal_sup = #{record.varUnequalSup,jdbcType=VARCHAR},
+      conf_level = #{record.confLevel,jdbcType=VARCHAR},
+      variable_id = #{record.variableId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.ModelIstestResult" >
+    update model_isttest_result
+    <set >
+      <if test="studyid != null" >
+        studyid = #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualT != null" >
+        var_equal_t = #{varEqualT,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualSig != null" >
+        var_equal_sig = #{varEqualSig,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualInf != null" >
+        var_equal_inf = #{varEqualInf,jdbcType=VARCHAR},
+      </if>
+      <if test="varEqualSup != null" >
+        var_equal_sup = #{varEqualSup,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalT != null" >
+        var_unequal_t = #{varUnequalT,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalSig != null" >
+        var_unequal_sig = #{varUnequalSig,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalInf != null" >
+        var_unequal_inf = #{varUnequalInf,jdbcType=VARCHAR},
+      </if>
+      <if test="varUnequalSup != null" >
+        var_unequal_sup = #{varUnequalSup,jdbcType=VARCHAR},
+      </if>
+      <if test="confLevel != null" >
+        conf_level = #{confLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="variableId != null" >
+        variable_id = #{variableId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where istt_id = #{isttId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.ModelIstestResult" >
+    update model_isttest_result
+    set studyid = #{studyid,jdbcType=VARCHAR},
+      var_equal_t = #{varEqualT,jdbcType=VARCHAR},
+      var_equal_sig = #{varEqualSig,jdbcType=VARCHAR},
+      var_equal_inf = #{varEqualInf,jdbcType=VARCHAR},
+      var_equal_sup = #{varEqualSup,jdbcType=VARCHAR},
+      var_unequal_t = #{varUnequalT,jdbcType=VARCHAR},
+      var_unequal_sig = #{varUnequalSig,jdbcType=VARCHAR},
+      var_unequal_inf = #{varUnequalInf,jdbcType=VARCHAR},
+      var_unequal_sup = #{varUnequalSup,jdbcType=VARCHAR},
+      conf_level = #{confLevel,jdbcType=VARCHAR},
+      variable_id = #{variableId,jdbcType=VARCHAR}
+    where istt_id = #{isttId,jdbcType=INTEGER}
+  </update>
+</mapper>

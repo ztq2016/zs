@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.OuterInterfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.OuterInterface" >
+    <result column="interfaceid" property="interfaceid" jdbcType="VARCHAR" />
+    <result column="interfacetype" property="interfacetype" jdbcType="VARCHAR" />
+    <result column="interfaceaddr" property="interfaceaddr" jdbcType="VARCHAR" />
+    <result column="interfaceapi" property="interfaceapi" jdbcType="VARCHAR" />
+    <result column="interfacecontent" property="interfacecontent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    interfaceid, interfacetype, interfaceaddr, interfaceapi, interfacecontent
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.OuterInterfaceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from OUTERINTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.OuterInterfaceExample" >
+    delete from OUTERINTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.OuterInterface" >
+    insert into OUTERINTERFACE (interfaceid, interfacetype, interfaceaddr, 
+      interfaceapi, interfacecontent)
+    values (#{interfaceid,jdbcType=VARCHAR}, #{interfacetype,jdbcType=VARCHAR}, #{interfaceaddr,jdbcType=VARCHAR}, 
+      #{interfaceapi,jdbcType=VARCHAR}, #{interfacecontent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.OuterInterface" >
+    insert into OUTERINTERFACE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="interfaceid != null" >
+        interfaceid,
+      </if>
+      <if test="interfacetype != null" >
+        interfacetype,
+      </if>
+      <if test="interfaceaddr != null" >
+        interfaceaddr,
+      </if>
+      <if test="interfaceapi != null" >
+        interfaceapi,
+      </if>
+      <if test="interfacecontent != null" >
+        interfacecontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="interfaceid != null" >
+        #{interfaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="interfacetype != null" >
+        #{interfacetype,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceaddr != null" >
+        #{interfaceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceapi != null" >
+        #{interfaceapi,jdbcType=VARCHAR},
+      </if>
+      <if test="interfacecontent != null" >
+        #{interfacecontent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.OuterInterfaceExample" resultType="java.lang.Integer" >
+    select count(*) from OUTERINTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update OUTERINTERFACE
+    <set >
+      <if test="record.interfaceid != null" >
+        interfaceid = #{record.interfaceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfacetype != null" >
+        interfacetype = #{record.interfacetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceaddr != null" >
+        interfaceaddr = #{record.interfaceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceapi != null" >
+        interfaceapi = #{record.interfaceapi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfacecontent != null" >
+        interfacecontent = #{record.interfacecontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update OUTERINTERFACE
+    set interfaceid = #{record.interfaceid,jdbcType=VARCHAR},
+      interfacetype = #{record.interfacetype,jdbcType=VARCHAR},
+      interfaceaddr = #{record.interfaceaddr,jdbcType=VARCHAR},
+      interfaceapi = #{record.interfaceapi,jdbcType=VARCHAR},
+      interfacecontent = #{record.interfacecontent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

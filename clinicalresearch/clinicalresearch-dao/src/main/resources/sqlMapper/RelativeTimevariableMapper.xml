@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.RelativeTimevariableMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.RelativeTimevariable" >
+    <id column="indicatorid" property="indicatorid" jdbcType="VARCHAR" />
+    <result column="indicatorname" property="indicatorname" jdbcType="VARCHAR" />
+    <result column="trigerevent" property="trigerevent" jdbcType="VARCHAR" />
+    <result column="trigereventba" property="trigereventba" jdbcType="VARCHAR" />
+    <result column="finalevent" property="finalevent" jdbcType="VARCHAR" />
+    <result column="finaleventtime" property="finaleventtime" jdbcType="VARCHAR" />
+    <result column="finaleventtimeunit" property="finaleventtimeunit" jdbcType="VARCHAR" />
+    <result column="finaleventtimeio" property="finaleventtimeio" jdbcType="VARCHAR" />
+    <result column="finaleventencounter" property="finaleventencounter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    indicatorid, indicatorname, trigerevent, trigereventba, finalevent, finaleventtime, 
+    finaleventtimeunit, finaleventtimeio, finaleventencounter
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RELATIVETIMEVARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from RELATIVETIMEVARIABLE
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from RELATIVETIMEVARIABLE
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariableExample" >
+    delete from RELATIVETIMEVARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariable" >
+    insert into RELATIVETIMEVARIABLE (indicatorid, indicatorname, trigerevent, 
+      trigereventba, finalevent, finaleventtime, 
+      finaleventtimeunit, finaleventtimeio, finaleventencounter
+      )
+    values (#{indicatorid,jdbcType=VARCHAR}, #{indicatorname,jdbcType=VARCHAR}, #{trigerevent,jdbcType=VARCHAR}, 
+      #{trigereventba,jdbcType=VARCHAR}, #{finalevent,jdbcType=VARCHAR}, #{finaleventtime,jdbcType=VARCHAR}, 
+      #{finaleventtimeunit,jdbcType=VARCHAR}, #{finaleventtimeio,jdbcType=VARCHAR}, #{finaleventencounter,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariable" >
+    insert into RELATIVETIMEVARIABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indicatorid != null" >
+        indicatorid,
+      </if>
+      <if test="indicatorname != null" >
+        indicatorname,
+      </if>
+      <if test="trigerevent != null" >
+        trigerevent,
+      </if>
+      <if test="trigereventba != null" >
+        trigereventba,
+      </if>
+      <if test="finalevent != null" >
+        finalevent,
+      </if>
+      <if test="finaleventtime != null" >
+        finaleventtime,
+      </if>
+      <if test="finaleventtimeunit != null" >
+        finaleventtimeunit,
+      </if>
+      <if test="finaleventtimeio != null" >
+        finaleventtimeio,
+      </if>
+      <if test="finaleventencounter != null" >
+        finaleventencounter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indicatorid != null" >
+        #{indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="indicatorname != null" >
+        #{indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="trigerevent != null" >
+        #{trigerevent,jdbcType=VARCHAR},
+      </if>
+      <if test="trigereventba != null" >
+        #{trigereventba,jdbcType=VARCHAR},
+      </if>
+      <if test="finalevent != null" >
+        #{finalevent,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtime != null" >
+        #{finaleventtime,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtimeunit != null" >
+        #{finaleventtimeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtimeio != null" >
+        #{finaleventtimeio,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventencounter != null" >
+        #{finaleventencounter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariableExample" resultType="java.lang.Integer" >
+    select count(*) from RELATIVETIMEVARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update RELATIVETIMEVARIABLE
+    <set >
+      <if test="record.indicatorid != null" >
+        indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indicatorname != null" >
+        indicatorname = #{record.indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trigerevent != null" >
+        trigerevent = #{record.trigerevent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trigereventba != null" >
+        trigereventba = #{record.trigereventba,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finalevent != null" >
+        finalevent = #{record.finalevent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finaleventtime != null" >
+        finaleventtime = #{record.finaleventtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finaleventtimeunit != null" >
+        finaleventtimeunit = #{record.finaleventtimeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finaleventtimeio != null" >
+        finaleventtimeio = #{record.finaleventtimeio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finaleventencounter != null" >
+        finaleventencounter = #{record.finaleventencounter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update RELATIVETIMEVARIABLE
+    set indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      indicatorname = #{record.indicatorname,jdbcType=VARCHAR},
+      trigerevent = #{record.trigerevent,jdbcType=VARCHAR},
+      trigereventba = #{record.trigereventba,jdbcType=VARCHAR},
+      finalevent = #{record.finalevent,jdbcType=VARCHAR},
+      finaleventtime = #{record.finaleventtime,jdbcType=VARCHAR},
+      finaleventtimeunit = #{record.finaleventtimeunit,jdbcType=VARCHAR},
+      finaleventtimeio = #{record.finaleventtimeio,jdbcType=VARCHAR},
+      finaleventencounter = #{record.finaleventencounter,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariable" >
+    update RELATIVETIMEVARIABLE
+    <set >
+      <if test="indicatorname != null" >
+        indicatorname = #{indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="trigerevent != null" >
+        trigerevent = #{trigerevent,jdbcType=VARCHAR},
+      </if>
+      <if test="trigereventba != null" >
+        trigereventba = #{trigereventba,jdbcType=VARCHAR},
+      </if>
+      <if test="finalevent != null" >
+        finalevent = #{finalevent,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtime != null" >
+        finaleventtime = #{finaleventtime,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtimeunit != null" >
+        finaleventtimeunit = #{finaleventtimeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventtimeio != null" >
+        finaleventtimeio = #{finaleventtimeio,jdbcType=VARCHAR},
+      </if>
+      <if test="finaleventencounter != null" >
+        finaleventencounter = #{finaleventencounter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.RelativeTimevariable" >
+    update RELATIVETIMEVARIABLE
+    set indicatorname = #{indicatorname,jdbcType=VARCHAR},
+      trigerevent = #{trigerevent,jdbcType=VARCHAR},
+      trigereventba = #{trigereventba,jdbcType=VARCHAR},
+      finalevent = #{finalevent,jdbcType=VARCHAR},
+      finaleventtime = #{finaleventtime,jdbcType=VARCHAR},
+      finaleventtimeunit = #{finaleventtimeunit,jdbcType=VARCHAR},
+      finaleventtimeio = #{finaleventtimeio,jdbcType=VARCHAR},
+      finaleventencounter = #{finaleventencounter,jdbcType=VARCHAR}
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.StatisticalModelMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.StatisticalModel" >
+    <id column="modelid" property="modelid" jdbcType="VARCHAR" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+    <result column="modelname" property="modelname" jdbcType="VARCHAR" />
+    <result column="modelbrief" property="modelbrief" jdbcType="VARCHAR" />
+    <result column="modelclasspath" property="modelclasspath" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    modelid, studyid, modelname, modelbrief, modelclasspath, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.StatisticalModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STATISTICALMODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from STATISTICALMODEL
+    where modelid = #{modelid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from STATISTICALMODEL
+    where modelid = #{modelid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.StatisticalModelExample" >
+    delete from STATISTICALMODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.StatisticalModel" >
+    insert into STATISTICALMODEL (modelid, studyid, modelname, 
+      modelbrief, modelclasspath, remark
+      )
+    values (#{modelid,jdbcType=VARCHAR}, #{studyid,jdbcType=VARCHAR}, #{modelname,jdbcType=VARCHAR}, 
+      #{modelbrief,jdbcType=VARCHAR}, #{modelclasspath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.StatisticalModel" >
+    insert into STATISTICALMODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        modelid,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+      <if test="modelname != null" >
+        modelname,
+      </if>
+      <if test="modelbrief != null" >
+        modelbrief,
+      </if>
+      <if test="modelclasspath != null" >
+        modelclasspath,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        #{modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="modelname != null" >
+        #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="modelbrief != null" >
+        #{modelbrief,jdbcType=VARCHAR},
+      </if>
+      <if test="modelclasspath != null" >
+        #{modelclasspath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.StatisticalModelExample" resultType="java.lang.Integer" >
+    select count(*) from STATISTICALMODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STATISTICALMODEL
+    <set >
+      <if test="record.modelid != null" >
+        modelid = #{record.modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelname != null" >
+        modelname = #{record.modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelbrief != null" >
+        modelbrief = #{record.modelbrief,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelclasspath != null" >
+        modelclasspath = #{record.modelclasspath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STATISTICALMODEL
+    set modelid = #{record.modelid,jdbcType=VARCHAR},
+      studyid = #{record.studyid,jdbcType=VARCHAR},
+      modelname = #{record.modelname,jdbcType=VARCHAR},
+      modelbrief = #{record.modelbrief,jdbcType=VARCHAR},
+      modelclasspath = #{record.modelclasspath,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.StatisticalModel" >
+    update STATISTICALMODEL
+    <set >
+      <if test="studyid != null" >
+        studyid = #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="modelname != null" >
+        modelname = #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="modelbrief != null" >
+        modelbrief = #{modelbrief,jdbcType=VARCHAR},
+      </if>
+      <if test="modelclasspath != null" >
+        modelclasspath = #{modelclasspath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where modelid = #{modelid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.StatisticalModel" >
+    update STATISTICALMODEL
+    set studyid = #{studyid,jdbcType=VARCHAR},
+      modelname = #{modelname,jdbcType=VARCHAR},
+      modelbrief = #{modelbrief,jdbcType=VARCHAR},
+      modelclasspath = #{modelclasspath,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where modelid = #{modelid,jdbcType=VARCHAR}
+  </update>
+</mapper>

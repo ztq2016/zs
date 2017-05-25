@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.StudysMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.Studys" >
+    <id column="studyid" property="studyid" jdbcType="VARCHAR" />
+    <result column="studytname" property="studytname" jdbcType="VARCHAR" />
+    <result column="studytype" property="studytype" jdbcType="VARCHAR" />
+    <result column="studyobjective" property="studyobjective" jdbcType="VARCHAR" />
+    <result column="principalinvestigator" property="principalinvestigator" jdbcType="VARCHAR" />
+    <result column="briefsummary" property="briefsummary" jdbcType="VARCHAR" />
+    <result column="collaborators" property="collaborators" jdbcType="VARCHAR" />
+    <result column="allocation" property="allocation" jdbcType="VARCHAR" />
+    <result column="masking" property="masking" jdbcType="VARCHAR" />
+    <result column="interventionmodel" property="interventionmodel" jdbcType="VARCHAR" />
+    <result column="control" property="control" jdbcType="VARCHAR" />
+    <result column="studystatus" property="studystatus" jdbcType="VARCHAR" />
+    <result column="studystartdate" property="studystartdate" jdbcType="DATE" />
+    <result column="studycompletiondate" property="studycompletiondate" jdbcType="DATE" />
+    <result column="sponsor" property="sponsor" jdbcType="VARCHAR" />
+    <result column="statisticalmodel" property="statisticalmodel" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+    <result column="lockstatus" property="lockstatus" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    studyid, studytname, studytype, studyobjective, principalinvestigator, briefsummary, 
+    collaborators, allocation, masking, interventionmodel, control, studystatus, studystartdate, 
+    studycompletiondate, sponsor, statisticalmodel, userid, timestamp, lockstatus, state, 
+    isdelete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.StudysExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STUDYS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from STUDYS
+    where studyid = #{studyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from STUDYS
+    where studyid = #{studyid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.StudysExample" >
+    delete from STUDYS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.Studys" >
+    insert into STUDYS (studyid, studytname, studytype, 
+      studyobjective, principalinvestigator, 
+      briefsummary, collaborators, allocation, 
+      masking, interventionmodel, control, 
+      studystatus, studystartdate, studycompletiondate, 
+      sponsor, statisticalmodel, userid, 
+      timestamp, lockstatus, state, 
+      isdelete)
+    values (#{studyid,jdbcType=VARCHAR}, #{studytname,jdbcType=VARCHAR}, #{studytype,jdbcType=VARCHAR}, 
+      #{studyobjective,jdbcType=VARCHAR}, #{principalinvestigator,jdbcType=VARCHAR}, 
+      #{briefsummary,jdbcType=VARCHAR}, #{collaborators,jdbcType=VARCHAR}, #{allocation,jdbcType=VARCHAR}, 
+      #{masking,jdbcType=VARCHAR}, #{interventionmodel,jdbcType=VARCHAR}, #{control,jdbcType=VARCHAR}, 
+      #{studystatus,jdbcType=VARCHAR}, #{studystartdate,jdbcType=DATE}, #{studycompletiondate,jdbcType=DATE}, 
+      #{sponsor,jdbcType=VARCHAR}, #{statisticalmodel,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{timestamp,jdbcType=TIMESTAMP}, #{lockstatus,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{isdelete,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.Studys" >
+    insert into STUDYS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studyid != null" >
+        studyid,
+      </if>
+      <if test="studytname != null" >
+        studytname,
+      </if>
+      <if test="studytype != null" >
+        studytype,
+      </if>
+      <if test="studyobjective != null" >
+        studyobjective,
+      </if>
+      <if test="principalinvestigator != null" >
+        principalinvestigator,
+      </if>
+      <if test="briefsummary != null" >
+        briefsummary,
+      </if>
+      <if test="collaborators != null" >
+        collaborators,
+      </if>
+      <if test="allocation != null" >
+        allocation,
+      </if>
+      <if test="masking != null" >
+        masking,
+      </if>
+      <if test="interventionmodel != null" >
+        interventionmodel,
+      </if>
+      <if test="control != null" >
+        control,
+      </if>
+      <if test="studystatus != null" >
+        studystatus,
+      </if>
+      <if test="studystartdate != null" >
+        studystartdate,
+      </if>
+      <if test="studycompletiondate != null" >
+        studycompletiondate,
+      </if>
+      <if test="sponsor != null" >
+        sponsor,
+      </if>
+      <if test="statisticalmodel != null" >
+        statisticalmodel,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="timestamp != null" >
+        timestamp,
+      </if>
+      <if test="lockstatus != null" >
+        lockstatus,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="studytname != null" >
+        #{studytname,jdbcType=VARCHAR},
+      </if>
+      <if test="studytype != null" >
+        #{studytype,jdbcType=VARCHAR},
+      </if>
+      <if test="studyobjective != null" >
+        #{studyobjective,jdbcType=VARCHAR},
+      </if>
+      <if test="principalinvestigator != null" >
+        #{principalinvestigator,jdbcType=VARCHAR},
+      </if>
+      <if test="briefsummary != null" >
+        #{briefsummary,jdbcType=VARCHAR},
+      </if>
+      <if test="collaborators != null" >
+        #{collaborators,jdbcType=VARCHAR},
+      </if>
+      <if test="allocation != null" >
+        #{allocation,jdbcType=VARCHAR},
+      </if>
+      <if test="masking != null" >
+        #{masking,jdbcType=VARCHAR},
+      </if>
+      <if test="interventionmodel != null" >
+        #{interventionmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="control != null" >
+        #{control,jdbcType=VARCHAR},
+      </if>
+      <if test="studystatus != null" >
+        #{studystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="studystartdate != null" >
+        #{studystartdate,jdbcType=DATE},
+      </if>
+      <if test="studycompletiondate != null" >
+        #{studycompletiondate,jdbcType=DATE},
+      </if>
+      <if test="sponsor != null" >
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticalmodel != null" >
+        #{statisticalmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockstatus != null" >
+        #{lockstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.StudysExample" resultType="java.lang.Integer" >
+    select count(*) from STUDYS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STUDYS
+    <set >
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studytname != null" >
+        studytname = #{record.studytname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studytype != null" >
+        studytype = #{record.studytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyobjective != null" >
+        studyobjective = #{record.studyobjective,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principalinvestigator != null" >
+        principalinvestigator = #{record.principalinvestigator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.briefsummary != null" >
+        briefsummary = #{record.briefsummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collaborators != null" >
+        collaborators = #{record.collaborators,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allocation != null" >
+        allocation = #{record.allocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.masking != null" >
+        masking = #{record.masking,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interventionmodel != null" >
+        interventionmodel = #{record.interventionmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.control != null" >
+        control = #{record.control,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studystatus != null" >
+        studystatus = #{record.studystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studystartdate != null" >
+        studystartdate = #{record.studystartdate,jdbcType=DATE},
+      </if>
+      <if test="record.studycompletiondate != null" >
+        studycompletiondate = #{record.studycompletiondate,jdbcType=DATE},
+      </if>
+      <if test="record.sponsor != null" >
+        sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statisticalmodel != null" >
+        statisticalmodel = #{record.statisticalmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timestamp != null" >
+        timestamp = #{record.timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lockstatus != null" >
+        lockstatus = #{record.lockstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STUDYS
+    set studyid = #{record.studyid,jdbcType=VARCHAR},
+      studytname = #{record.studytname,jdbcType=VARCHAR},
+      studytype = #{record.studytype,jdbcType=VARCHAR},
+      studyobjective = #{record.studyobjective,jdbcType=VARCHAR},
+      principalinvestigator = #{record.principalinvestigator,jdbcType=VARCHAR},
+      briefsummary = #{record.briefsummary,jdbcType=VARCHAR},
+      collaborators = #{record.collaborators,jdbcType=VARCHAR},
+      allocation = #{record.allocation,jdbcType=VARCHAR},
+      masking = #{record.masking,jdbcType=VARCHAR},
+      interventionmodel = #{record.interventionmodel,jdbcType=VARCHAR},
+      control = #{record.control,jdbcType=VARCHAR},
+      studystatus = #{record.studystatus,jdbcType=VARCHAR},
+      studystartdate = #{record.studystartdate,jdbcType=DATE},
+      studycompletiondate = #{record.studycompletiondate,jdbcType=DATE},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      statisticalmodel = #{record.statisticalmodel,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      timestamp = #{record.timestamp,jdbcType=TIMESTAMP},
+      lockstatus = #{record.lockstatus,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      isdelete = #{record.isdelete,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.Studys" >
+    update STUDYS
+    <set >
+      <if test="studytname != null" >
+        studytname = #{studytname,jdbcType=VARCHAR},
+      </if>
+      <if test="studytype != null" >
+        studytype = #{studytype,jdbcType=VARCHAR},
+      </if>
+      <if test="studyobjective != null" >
+        studyobjective = #{studyobjective,jdbcType=VARCHAR},
+      </if>
+      <if test="principalinvestigator != null" >
+        principalinvestigator = #{principalinvestigator,jdbcType=VARCHAR},
+      </if>
+      <if test="briefsummary != null" >
+        briefsummary = #{briefsummary,jdbcType=VARCHAR},
+      </if>
+      <if test="collaborators != null" >
+        collaborators = #{collaborators,jdbcType=VARCHAR},
+      </if>
+      <if test="allocation != null" >
+        allocation = #{allocation,jdbcType=VARCHAR},
+      </if>
+      <if test="masking != null" >
+        masking = #{masking,jdbcType=VARCHAR},
+      </if>
+      <if test="interventionmodel != null" >
+        interventionmodel = #{interventionmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="control != null" >
+        control = #{control,jdbcType=VARCHAR},
+      </if>
+      <if test="studystatus != null" >
+        studystatus = #{studystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="studystartdate != null" >
+        studystartdate = #{studystartdate,jdbcType=DATE},
+      </if>
+      <if test="studycompletiondate != null" >
+        studycompletiondate = #{studycompletiondate,jdbcType=DATE},
+      </if>
+      <if test="sponsor != null" >
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticalmodel != null" >
+        statisticalmodel = #{statisticalmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockstatus != null" >
+        lockstatus = #{lockstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where studyid = #{studyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.Studys" >
+    update STUDYS
+    set studytname = #{studytname,jdbcType=VARCHAR},
+      studytype = #{studytype,jdbcType=VARCHAR},
+      studyobjective = #{studyobjective,jdbcType=VARCHAR},
+      principalinvestigator = #{principalinvestigator,jdbcType=VARCHAR},
+      briefsummary = #{briefsummary,jdbcType=VARCHAR},
+      collaborators = #{collaborators,jdbcType=VARCHAR},
+      allocation = #{allocation,jdbcType=VARCHAR},
+      masking = #{masking,jdbcType=VARCHAR},
+      interventionmodel = #{interventionmodel,jdbcType=VARCHAR},
+      control = #{control,jdbcType=VARCHAR},
+      studystatus = #{studystatus,jdbcType=VARCHAR},
+      studystartdate = #{studystartdate,jdbcType=DATE},
+      studycompletiondate = #{studycompletiondate,jdbcType=DATE},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      statisticalmodel = #{statisticalmodel,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      lockstatus = #{lockstatus,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      isdelete = #{isdelete,jdbcType=VARCHAR}
+    where studyid = #{studyid,jdbcType=VARCHAR}
+  </update>
+</mapper>

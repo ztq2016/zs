@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.RtvtrigersMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.Rtvtrigers" >
+    <result column="trigerid" property="trigerid" jdbcType="VARCHAR" />
+    <result column="trigername" property="trigername" jdbcType="VARCHAR" />
+    <result column="trigertype" property="trigertype" jdbcType="VARCHAR" />
+    <result column="fieldtableid" property="fieldtableid" jdbcType="VARCHAR" />
+    <result column="timefiled" property="timefiled" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trigerid, trigername, trigertype, fieldtableid, timefiled
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.RtvtrigersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RTVTRIGERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.RtvtrigersExample" >
+    delete from RTVTRIGERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.Rtvtrigers" >
+    insert into RTVTRIGERS (trigerid, trigername, trigertype, 
+      fieldtableid, timefiled)
+    values (#{trigerid,jdbcType=VARCHAR}, #{trigername,jdbcType=VARCHAR}, #{trigertype,jdbcType=VARCHAR}, 
+      #{fieldtableid,jdbcType=VARCHAR}, #{timefiled,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.Rtvtrigers" >
+    insert into RTVTRIGERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trigerid != null" >
+        trigerid,
+      </if>
+      <if test="trigername != null" >
+        trigername,
+      </if>
+      <if test="trigertype != null" >
+        trigertype,
+      </if>
+      <if test="fieldtableid != null" >
+        fieldtableid,
+      </if>
+      <if test="timefiled != null" >
+        timefiled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trigerid != null" >
+        #{trigerid,jdbcType=VARCHAR},
+      </if>
+      <if test="trigername != null" >
+        #{trigername,jdbcType=VARCHAR},
+      </if>
+      <if test="trigertype != null" >
+        #{trigertype,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtableid != null" >
+        #{fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="timefiled != null" >
+        #{timefiled,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.RtvtrigersExample" resultType="java.lang.Integer" >
+    select count(*) from RTVTRIGERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update RTVTRIGERS
+    <set >
+      <if test="record.trigerid != null" >
+        trigerid = #{record.trigerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trigername != null" >
+        trigername = #{record.trigername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trigertype != null" >
+        trigertype = #{record.trigertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldtableid != null" >
+        fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timefiled != null" >
+        timefiled = #{record.timefiled,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update RTVTRIGERS
+    set trigerid = #{record.trigerid,jdbcType=VARCHAR},
+      trigername = #{record.trigername,jdbcType=VARCHAR},
+      trigertype = #{record.trigertype,jdbcType=VARCHAR},
+      fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      timefiled = #{record.timefiled,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

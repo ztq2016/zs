@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.StudyinDicatorsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.StudyinDicators" >
+    <id column="indicatorid" property="indicatorid" jdbcType="VARCHAR" />
+    <result column="indicatorname" property="indicatorname" jdbcType="VARCHAR" />
+    <result column="classificationid" property="classificationid" jdbcType="VARCHAR" />
+    <result column="fieldtableid" property="fieldtableid" jdbcType="VARCHAR" />
+    <result column="indicatorexpression" property="indicatorexpression" jdbcType="VARCHAR" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    indicatorid, indicatorname, classificationid, fieldtableid, indicatorexpression, 
+    studyid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.StudyinDicatorsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STUDYINDICATORS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from STUDYINDICATORS
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from STUDYINDICATORS
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.StudyinDicatorsExample" >
+    delete from STUDYINDICATORS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.StudyinDicators" >
+    insert into STUDYINDICATORS (indicatorid, indicatorname, classificationid, 
+      fieldtableid, indicatorexpression, studyid
+      )
+    values (#{indicatorid,jdbcType=VARCHAR}, #{indicatorname,jdbcType=VARCHAR}, #{classificationid,jdbcType=VARCHAR}, 
+      #{fieldtableid,jdbcType=VARCHAR}, #{indicatorexpression,jdbcType=VARCHAR}, #{studyid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.StudyinDicators" >
+    insert into STUDYINDICATORS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indicatorid != null" >
+        indicatorid,
+      </if>
+      <if test="indicatorname != null" >
+        indicatorname,
+      </if>
+      <if test="classificationid != null" >
+        classificationid,
+      </if>
+      <if test="fieldtableid != null" >
+        fieldtableid,
+      </if>
+      <if test="indicatorexpression != null" >
+        indicatorexpression,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indicatorid != null" >
+        #{indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="indicatorname != null" >
+        #{indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationid != null" >
+        #{classificationid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtableid != null" >
+        #{fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="indicatorexpression != null" >
+        #{indicatorexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.StudyinDicatorsExample" resultType="java.lang.Integer" >
+    select count(*) from STUDYINDICATORS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STUDYINDICATORS
+    <set >
+      <if test="record.indicatorid != null" >
+        indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indicatorname != null" >
+        indicatorname = #{record.indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classificationid != null" >
+        classificationid = #{record.classificationid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldtableid != null" >
+        fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indicatorexpression != null" >
+        indicatorexpression = #{record.indicatorexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STUDYINDICATORS
+    set indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      indicatorname = #{record.indicatorname,jdbcType=VARCHAR},
+      classificationid = #{record.classificationid,jdbcType=VARCHAR},
+      fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      indicatorexpression = #{record.indicatorexpression,jdbcType=VARCHAR},
+      studyid = #{record.studyid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.StudyinDicators" >
+    update STUDYINDICATORS
+    <set >
+      <if test="indicatorname != null" >
+        indicatorname = #{indicatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationid != null" >
+        classificationid = #{classificationid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtableid != null" >
+        fieldtableid = #{fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="indicatorexpression != null" >
+        indicatorexpression = #{indicatorexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        studyid = #{studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.StudyinDicators" >
+    update STUDYINDICATORS
+    set indicatorname = #{indicatorname,jdbcType=VARCHAR},
+      classificationid = #{classificationid,jdbcType=VARCHAR},
+      fieldtableid = #{fieldtableid,jdbcType=VARCHAR},
+      indicatorexpression = #{indicatorexpression,jdbcType=VARCHAR},
+      studyid = #{studyid,jdbcType=VARCHAR}
+    where indicatorid = #{indicatorid,jdbcType=VARCHAR}
+  </update>
+</mapper>

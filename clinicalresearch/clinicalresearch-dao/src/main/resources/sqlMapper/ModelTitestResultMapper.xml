@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ModelTitestResultMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ModelTitestResult" >
+    <id column="tit_id" property="titId" jdbcType="INTEGER" />
+    <result column="study_id" property="studyId" jdbcType="VARCHAR" />
+    <result column="variable_id" property="variableId" jdbcType="VARCHAR" />
+    <result column="group_a" property="groupA" jdbcType="VARCHAR" />
+    <result column="a_rank_mean" property="aRankMean" jdbcType="VARCHAR" />
+    <result column="a_rank_sum" property="aRankSum" jdbcType="VARCHAR" />
+    <result column="a_sample_sum" property="aSampleSum" jdbcType="VARCHAR" />
+    <result column="group_b" property="groupB" jdbcType="VARCHAR" />
+    <result column="b_rank_mean" property="bRankMean" jdbcType="VARCHAR" />
+    <result column="b_rank_sum" property="bRankSum" jdbcType="VARCHAR" />
+    <result column="b_sample_sum" property="bSampleSum" jdbcType="VARCHAR" />
+    <result column="sum_all" property="sumAll" jdbcType="VARCHAR" />
+    <result column="mwu" property="mwu" jdbcType="VARCHAR" />
+    <result column="z" property="z" jdbcType="VARCHAR" />
+    <result column="p_value" property="pValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tit_id, study_id, variable_id, group_a, a_rank_mean, a_rank_sum, a_sample_sum, group_b, 
+    b_rank_mean, b_rank_sum, b_sample_sum, sum_all, mwu, z, p_value
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.ModelTitestResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model_titest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from model_titest_result
+    where tit_id = #{titId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from model_titest_result
+    where tit_id = #{titId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.ModelTitestResultExample" >
+    delete from model_titest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.ModelTitestResult" >
+    <selectKey resultType="java.lang.Integer" keyProperty="titId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into model_titest_result (study_id, variable_id, group_a, 
+      a_rank_mean, a_rank_sum, a_sample_sum, 
+      group_b, b_rank_mean, b_rank_sum, 
+      b_sample_sum, sum_all, mwu, 
+      z, p_value)
+    values (#{studyId,jdbcType=VARCHAR}, #{variableId,jdbcType=VARCHAR}, #{groupA,jdbcType=VARCHAR}, 
+      #{aRankMean,jdbcType=VARCHAR}, #{aRankSum,jdbcType=VARCHAR}, #{aSampleSum,jdbcType=VARCHAR}, 
+      #{groupB,jdbcType=VARCHAR}, #{bRankMean,jdbcType=VARCHAR}, #{bRankSum,jdbcType=VARCHAR}, 
+      #{bSampleSum,jdbcType=VARCHAR}, #{sumAll,jdbcType=VARCHAR}, #{mwu,jdbcType=VARCHAR}, 
+      #{z,jdbcType=VARCHAR}, #{pValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.ModelTitestResult" >
+    <selectKey resultType="java.lang.Integer" keyProperty="titId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into model_titest_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studyId != null" >
+        study_id,
+      </if>
+      <if test="variableId != null" >
+        variable_id,
+      </if>
+      <if test="groupA != null" >
+        group_a,
+      </if>
+      <if test="aRankMean != null" >
+        a_rank_mean,
+      </if>
+      <if test="aRankSum != null" >
+        a_rank_sum,
+      </if>
+      <if test="aSampleSum != null" >
+        a_sample_sum,
+      </if>
+      <if test="groupB != null" >
+        group_b,
+      </if>
+      <if test="bRankMean != null" >
+        b_rank_mean,
+      </if>
+      <if test="bRankSum != null" >
+        b_rank_sum,
+      </if>
+      <if test="bSampleSum != null" >
+        b_sample_sum,
+      </if>
+      <if test="sumAll != null" >
+        sum_all,
+      </if>
+      <if test="mwu != null" >
+        mwu,
+      </if>
+      <if test="z != null" >
+        z,
+      </if>
+      <if test="pValue != null" >
+        p_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studyId != null" >
+        #{studyId,jdbcType=VARCHAR},
+      </if>
+      <if test="variableId != null" >
+        #{variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupA != null" >
+        #{groupA,jdbcType=VARCHAR},
+      </if>
+      <if test="aRankMean != null" >
+        #{aRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="aRankSum != null" >
+        #{aRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="aSampleSum != null" >
+        #{aSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="groupB != null" >
+        #{groupB,jdbcType=VARCHAR},
+      </if>
+      <if test="bRankMean != null" >
+        #{bRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="bRankSum != null" >
+        #{bRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="bSampleSum != null" >
+        #{bSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="sumAll != null" >
+        #{sumAll,jdbcType=VARCHAR},
+      </if>
+      <if test="mwu != null" >
+        #{mwu,jdbcType=VARCHAR},
+      </if>
+      <if test="z != null" >
+        #{z,jdbcType=VARCHAR},
+      </if>
+      <if test="pValue != null" >
+        #{pValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.ModelTitestResultExample" resultType="java.lang.Integer" >
+    select count(*) from model_titest_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update model_titest_result
+    <set >
+      <if test="record.titId != null" >
+        tit_id = #{record.titId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studyId != null" >
+        study_id = #{record.studyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.variableId != null" >
+        variable_id = #{record.variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupA != null" >
+        group_a = #{record.groupA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aRankMean != null" >
+        a_rank_mean = #{record.aRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aRankSum != null" >
+        a_rank_sum = #{record.aRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aSampleSum != null" >
+        a_sample_sum = #{record.aSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupB != null" >
+        group_b = #{record.groupB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bRankMean != null" >
+        b_rank_mean = #{record.bRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bRankSum != null" >
+        b_rank_sum = #{record.bRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bSampleSum != null" >
+        b_sample_sum = #{record.bSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumAll != null" >
+        sum_all = #{record.sumAll,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mwu != null" >
+        mwu = #{record.mwu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.z != null" >
+        z = #{record.z,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pValue != null" >
+        p_value = #{record.pValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update model_titest_result
+    set tit_id = #{record.titId,jdbcType=INTEGER},
+      study_id = #{record.studyId,jdbcType=VARCHAR},
+      variable_id = #{record.variableId,jdbcType=VARCHAR},
+      group_a = #{record.groupA,jdbcType=VARCHAR},
+      a_rank_mean = #{record.aRankMean,jdbcType=VARCHAR},
+      a_rank_sum = #{record.aRankSum,jdbcType=VARCHAR},
+      a_sample_sum = #{record.aSampleSum,jdbcType=VARCHAR},
+      group_b = #{record.groupB,jdbcType=VARCHAR},
+      b_rank_mean = #{record.bRankMean,jdbcType=VARCHAR},
+      b_rank_sum = #{record.bRankSum,jdbcType=VARCHAR},
+      b_sample_sum = #{record.bSampleSum,jdbcType=VARCHAR},
+      sum_all = #{record.sumAll,jdbcType=VARCHAR},
+      mwu = #{record.mwu,jdbcType=VARCHAR},
+      z = #{record.z,jdbcType=VARCHAR},
+      p_value = #{record.pValue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.ModelTitestResult" >
+    update model_titest_result
+    <set >
+      <if test="studyId != null" >
+        study_id = #{studyId,jdbcType=VARCHAR},
+      </if>
+      <if test="variableId != null" >
+        variable_id = #{variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupA != null" >
+        group_a = #{groupA,jdbcType=VARCHAR},
+      </if>
+      <if test="aRankMean != null" >
+        a_rank_mean = #{aRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="aRankSum != null" >
+        a_rank_sum = #{aRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="aSampleSum != null" >
+        a_sample_sum = #{aSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="groupB != null" >
+        group_b = #{groupB,jdbcType=VARCHAR},
+      </if>
+      <if test="bRankMean != null" >
+        b_rank_mean = #{bRankMean,jdbcType=VARCHAR},
+      </if>
+      <if test="bRankSum != null" >
+        b_rank_sum = #{bRankSum,jdbcType=VARCHAR},
+      </if>
+      <if test="bSampleSum != null" >
+        b_sample_sum = #{bSampleSum,jdbcType=VARCHAR},
+      </if>
+      <if test="sumAll != null" >
+        sum_all = #{sumAll,jdbcType=VARCHAR},
+      </if>
+      <if test="mwu != null" >
+        mwu = #{mwu,jdbcType=VARCHAR},
+      </if>
+      <if test="z != null" >
+        z = #{z,jdbcType=VARCHAR},
+      </if>
+      <if test="pValue != null" >
+        p_value = #{pValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tit_id = #{titId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.ModelTitestResult" >
+    update model_titest_result
+    set study_id = #{studyId,jdbcType=VARCHAR},
+      variable_id = #{variableId,jdbcType=VARCHAR},
+      group_a = #{groupA,jdbcType=VARCHAR},
+      a_rank_mean = #{aRankMean,jdbcType=VARCHAR},
+      a_rank_sum = #{aRankSum,jdbcType=VARCHAR},
+      a_sample_sum = #{aSampleSum,jdbcType=VARCHAR},
+      group_b = #{groupB,jdbcType=VARCHAR},
+      b_rank_mean = #{bRankMean,jdbcType=VARCHAR},
+      b_rank_sum = #{bRankSum,jdbcType=VARCHAR},
+      b_sample_sum = #{bSampleSum,jdbcType=VARCHAR},
+      sum_all = #{sumAll,jdbcType=VARCHAR},
+      mwu = #{mwu,jdbcType=VARCHAR},
+      z = #{z,jdbcType=VARCHAR},
+      p_value = #{pValue,jdbcType=VARCHAR}
+    where tit_id = #{titId,jdbcType=INTEGER}
+  </update>
+</mapper>

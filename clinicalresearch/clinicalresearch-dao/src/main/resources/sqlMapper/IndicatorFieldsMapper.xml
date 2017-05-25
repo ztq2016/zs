@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.IndicatorFieldsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.IndicatorFields" >
+    <id column="fieldtableid" property="fieldtableid" jdbcType="VARCHAR" />
+    <result column="fieldid" property="fieldid" jdbcType="VARCHAR" />
+    <result column="fieldname" property="fieldname" jdbcType="VARCHAR" />
+    <result column="fieldtype" property="fieldtype" jdbcType="VARCHAR" />
+    <result column="fieldvalue" property="fieldvalue" jdbcType="VARCHAR" />
+    <result column="fieldversion" property="fieldversion" jdbcType="VARCHAR" />
+    <result column="fielddesc" property="fielddesc" jdbcType="VARCHAR" />
+    <result column="fpycode" property="fpycode" jdbcType="VARCHAR" />
+    <result column="fieldorder" property="fieldorder" jdbcType="VARCHAR" />
+    <result column="fatherid" property="fatherid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fieldtableid, fieldid, fieldname, fieldtype, fieldvalue, fieldversion, fielddesc, 
+    fpycode, fieldorder, fatherid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.IndicatorFieldsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from INDICATORFIELDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from INDICATORFIELDS
+    where fieldtableid = #{fieldtableid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from INDICATORFIELDS
+    where fieldtableid = #{fieldtableid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.IndicatorFieldsExample" >
+    delete from INDICATORFIELDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.IndicatorFields" >
+    insert into INDICATORFIELDS (fieldtableid, fieldid, fieldname, 
+      fieldtype, fieldvalue, fieldversion, 
+      fielddesc, fpycode, fieldorder, 
+      fatherid)
+    values (#{fieldtableid,jdbcType=VARCHAR}, #{fieldid,jdbcType=VARCHAR}, #{fieldname,jdbcType=VARCHAR}, 
+      #{fieldtype,jdbcType=VARCHAR}, #{fieldvalue,jdbcType=VARCHAR}, #{fieldversion,jdbcType=VARCHAR}, 
+      #{fielddesc,jdbcType=VARCHAR}, #{fpycode,jdbcType=VARCHAR}, #{fieldorder,jdbcType=VARCHAR}, 
+      #{fatherid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.IndicatorFields" >
+    insert into INDICATORFIELDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldtableid != null" >
+        fieldtableid,
+      </if>
+      <if test="fieldid != null" >
+        fieldid,
+      </if>
+      <if test="fieldname != null" >
+        fieldname,
+      </if>
+      <if test="fieldtype != null" >
+        fieldtype,
+      </if>
+      <if test="fieldvalue != null" >
+        fieldvalue,
+      </if>
+      <if test="fieldversion != null" >
+        fieldversion,
+      </if>
+      <if test="fielddesc != null" >
+        fielddesc,
+      </if>
+      <if test="fpycode != null" >
+        fpycode,
+      </if>
+      <if test="fieldorder != null" >
+        fieldorder,
+      </if>
+      <if test="fatherid != null" >
+        fatherid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldtableid != null" >
+        #{fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldid != null" >
+        #{fieldid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldname != null" >
+        #{fieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtype != null" >
+        #{fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldvalue != null" >
+        #{fieldvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldversion != null" >
+        #{fieldversion,jdbcType=VARCHAR},
+      </if>
+      <if test="fielddesc != null" >
+        #{fielddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fpycode != null" >
+        #{fpycode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldorder != null" >
+        #{fieldorder,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherid != null" >
+        #{fatherid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.IndicatorFieldsExample" resultType="java.lang.Integer" >
+    select count(*) from INDICATORFIELDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update INDICATORFIELDS
+    <set >
+      <if test="record.fieldtableid != null" >
+        fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldid != null" >
+        fieldid = #{record.fieldid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldname != null" >
+        fieldname = #{record.fieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldtype != null" >
+        fieldtype = #{record.fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldvalue != null" >
+        fieldvalue = #{record.fieldvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldversion != null" >
+        fieldversion = #{record.fieldversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fielddesc != null" >
+        fielddesc = #{record.fielddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpycode != null" >
+        fpycode = #{record.fpycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldorder != null" >
+        fieldorder = #{record.fieldorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fatherid != null" >
+        fatherid = #{record.fatherid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update INDICATORFIELDS
+    set fieldtableid = #{record.fieldtableid,jdbcType=VARCHAR},
+      fieldid = #{record.fieldid,jdbcType=VARCHAR},
+      fieldname = #{record.fieldname,jdbcType=VARCHAR},
+      fieldtype = #{record.fieldtype,jdbcType=VARCHAR},
+      fieldvalue = #{record.fieldvalue,jdbcType=VARCHAR},
+      fieldversion = #{record.fieldversion,jdbcType=VARCHAR},
+      fielddesc = #{record.fielddesc,jdbcType=VARCHAR},
+      fpycode = #{record.fpycode,jdbcType=VARCHAR},
+      fieldorder = #{record.fieldorder,jdbcType=VARCHAR},
+      fatherid = #{record.fatherid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.IndicatorFields" >
+    update INDICATORFIELDS
+    <set >
+      <if test="fieldid != null" >
+        fieldid = #{fieldid,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldname != null" >
+        fieldname = #{fieldname,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldtype != null" >
+        fieldtype = #{fieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldvalue != null" >
+        fieldvalue = #{fieldvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldversion != null" >
+        fieldversion = #{fieldversion,jdbcType=VARCHAR},
+      </if>
+      <if test="fielddesc != null" >
+        fielddesc = #{fielddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fpycode != null" >
+        fpycode = #{fpycode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldorder != null" >
+        fieldorder = #{fieldorder,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherid != null" >
+        fatherid = #{fatherid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fieldtableid = #{fieldtableid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.IndicatorFields" >
+    update INDICATORFIELDS
+    set fieldid = #{fieldid,jdbcType=VARCHAR},
+      fieldname = #{fieldname,jdbcType=VARCHAR},
+      fieldtype = #{fieldtype,jdbcType=VARCHAR},
+      fieldvalue = #{fieldvalue,jdbcType=VARCHAR},
+      fieldversion = #{fieldversion,jdbcType=VARCHAR},
+      fielddesc = #{fielddesc,jdbcType=VARCHAR},
+      fpycode = #{fpycode,jdbcType=VARCHAR},
+      fieldorder = #{fieldorder,jdbcType=VARCHAR},
+      fatherid = #{fatherid,jdbcType=VARCHAR}
+    where fieldtableid = #{fieldtableid,jdbcType=VARCHAR}
+  </update>
+</mapper>

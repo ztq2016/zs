@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.StatisticalResultMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.StatisticalResult" >
+    <result column="modelid" property="modelid" jdbcType="VARCHAR" />
+    <result column="resultid" property="resultid" jdbcType="VARCHAR" />
+    <result column="itemname" property="itemname" jdbcType="VARCHAR" />
+    <result column="itemvalue" property="itemvalue" jdbcType="VARCHAR" />
+    <result column="indicatorid" property="indicatorid" jdbcType="VARCHAR" />
+    <result column="resulttype" property="resulttype" jdbcType="VARCHAR" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    modelid, resultid, itemname, itemvalue, indicatorid, resulttype, studyid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.StatisticalResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STATISTICALRESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.StatisticalResultExample" >
+    delete from STATISTICALRESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.StatisticalResult" >
+    insert into STATISTICALRESULT (modelid, resultid, itemname, 
+      itemvalue, indicatorid, resulttype, 
+      studyid)
+    values (#{modelid,jdbcType=VARCHAR}, #{resultid,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, 
+      #{itemvalue,jdbcType=VARCHAR}, #{indicatorid,jdbcType=VARCHAR}, #{resulttype,jdbcType=VARCHAR}, 
+      #{studyid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.StatisticalResult" >
+    insert into STATISTICALRESULT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        modelid,
+      </if>
+      <if test="resultid != null" >
+        resultid,
+      </if>
+      <if test="itemname != null" >
+        itemname,
+      </if>
+      <if test="itemvalue != null" >
+        itemvalue,
+      </if>
+      <if test="indicatorid != null" >
+        indicatorid,
+      </if>
+      <if test="resulttype != null" >
+        resulttype,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        #{modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="resultid != null" >
+        #{resultid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemvalue != null" >
+        #{itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="indicatorid != null" >
+        #{indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="resulttype != null" >
+        #{resulttype,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.StatisticalResultExample" resultType="java.lang.Integer" >
+    select count(*) from STATISTICALRESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STATISTICALRESULT
+    <set >
+      <if test="record.modelid != null" >
+        modelid = #{record.modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultid != null" >
+        resultid = #{record.resultid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemname != null" >
+        itemname = #{record.itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemvalue != null" >
+        itemvalue = #{record.itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indicatorid != null" >
+        indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resulttype != null" >
+        resulttype = #{record.resulttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STATISTICALRESULT
+    set modelid = #{record.modelid,jdbcType=VARCHAR},
+      resultid = #{record.resultid,jdbcType=VARCHAR},
+      itemname = #{record.itemname,jdbcType=VARCHAR},
+      itemvalue = #{record.itemvalue,jdbcType=VARCHAR},
+      indicatorid = #{record.indicatorid,jdbcType=VARCHAR},
+      resulttype = #{record.resulttype,jdbcType=VARCHAR},
+      studyid = #{record.studyid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

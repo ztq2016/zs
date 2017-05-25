@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.IndicatorFieldsExtendsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.IndicatorFields" >
+    <id column="fieldtableid" property="fieldtableid" jdbcType="VARCHAR" />
+    <result column="fieldid" property="fieldid" jdbcType="VARCHAR" />
+    <result column="fieldname" property="fieldname" jdbcType="VARCHAR" />
+    <result column="fieldtype" property="fieldtype" jdbcType="VARCHAR" />
+    <result column="fieldvalue" property="fieldvalue" jdbcType="VARCHAR" />
+    <result column="fieldversion" property="fieldversion" jdbcType="VARCHAR" />
+    <result column="fielddesc" property="fielddesc" jdbcType="VARCHAR" />
+    <result column="fpycode" property="fpycode" jdbcType="VARCHAR" />
+    <result column="fieldorder" property="fieldorder" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="com.clinicalresearch.dao.manager.IndicatorFieldsMapper">
+  insert into INDICATORFIELDS (fieldtableid, fieldid, fieldname, 
+      fieldtype, fieldvalue, fieldversion, 
+      fielddesc, fpycode, fieldorder
+      ) values 
+      <foreach collection="list" item="f" separator="," close=";">
+      (#{f.fieldtableid,jdbcType=VARCHAR}, #{f.fieldid,jdbcType=VARCHAR}, #{f.fieldname,jdbcType=VARCHAR}, 
+      #{f.fieldtype,jdbcType=VARCHAR}, #{f.fieldvalue,jdbcType=VARCHAR}, #{f.fieldversion,jdbcType=VARCHAR}, 
+      #{f.fielddesc,jdbcType=VARCHAR}, #{f.fpycode,jdbcType=VARCHAR}, #{f.fieldorder,jdbcType=VARCHAR}
+      )
+      </foreach>
+  </insert>
+</mapper>

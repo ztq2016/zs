@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.InclusionCriteriaMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.InclusionCriteria" >
+    <id column="criteriaid" property="criteriaid" jdbcType="VARCHAR" />
+    <result column="criteriaexpression" property="criteriaexpression" jdbcType="VARCHAR" />
+    <result column="expression" property="expression" jdbcType="VARCHAR" />
+    <result column="istrue" property="istrue" jdbcType="VARCHAR" />
+    <result column="studyid" property="studyid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    criteriaid, criteriaexpression, expression, istrue, studyid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.InclusionCriteriaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from INCLUSIONCRITERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from INCLUSIONCRITERIA
+    where criteriaid = #{criteriaid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from INCLUSIONCRITERIA
+    where criteriaid = #{criteriaid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.InclusionCriteriaExample" >
+    delete from INCLUSIONCRITERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.InclusionCriteria" >
+    insert into INCLUSIONCRITERIA (criteriaid, criteriaexpression, expression, 
+      istrue, studyid)
+    values (#{criteriaid,jdbcType=VARCHAR}, #{criteriaexpression,jdbcType=VARCHAR}, #{expression,jdbcType=VARCHAR}, 
+      #{istrue,jdbcType=VARCHAR}, #{studyid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.InclusionCriteria" >
+    insert into INCLUSIONCRITERIA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="criteriaid != null" >
+        criteriaid,
+      </if>
+      <if test="criteriaexpression != null" >
+        criteriaexpression,
+      </if>
+      <if test="expression != null" >
+        expression,
+      </if>
+      <if test="istrue != null" >
+        istrue,
+      </if>
+      <if test="studyid != null" >
+        studyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="criteriaid != null" >
+        #{criteriaid,jdbcType=VARCHAR},
+      </if>
+      <if test="criteriaexpression != null" >
+        #{criteriaexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null" >
+        #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        #{istrue,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.InclusionCriteriaExample" resultType="java.lang.Integer" >
+    select count(*) from INCLUSIONCRITERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update INCLUSIONCRITERIA
+    <set >
+      <if test="record.criteriaid != null" >
+        criteriaid = #{record.criteriaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.criteriaexpression != null" >
+        criteriaexpression = #{record.criteriaexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expression != null" >
+        expression = #{record.expression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istrue != null" >
+        istrue = #{record.istrue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyid != null" >
+        studyid = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update INCLUSIONCRITERIA
+    set criteriaid = #{record.criteriaid,jdbcType=VARCHAR},
+      criteriaexpression = #{record.criteriaexpression,jdbcType=VARCHAR},
+      expression = #{record.expression,jdbcType=VARCHAR},
+      istrue = #{record.istrue,jdbcType=VARCHAR},
+      studyid = #{record.studyid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.InclusionCriteria" >
+    update INCLUSIONCRITERIA
+    <set >
+      <if test="criteriaexpression != null" >
+        criteriaexpression = #{criteriaexpression,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null" >
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="istrue != null" >
+        istrue = #{istrue,jdbcType=VARCHAR},
+      </if>
+      <if test="studyid != null" >
+        studyid = #{studyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where criteriaid = #{criteriaid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.InclusionCriteria" >
+    update INCLUSIONCRITERIA
+    set criteriaexpression = #{criteriaexpression,jdbcType=VARCHAR},
+      expression = #{expression,jdbcType=VARCHAR},
+      istrue = #{istrue,jdbcType=VARCHAR},
+      studyid = #{studyid,jdbcType=VARCHAR}
+    where criteriaid = #{criteriaid,jdbcType=VARCHAR}
+  </update>
+</mapper>

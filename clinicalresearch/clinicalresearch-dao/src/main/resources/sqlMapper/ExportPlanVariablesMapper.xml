@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ExportPlanVariablesMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    <id column="link_id" property="linkId" jdbcType="INTEGER" />
+    <result column="exp_id" property="expId" jdbcType="INTEGER" />
+    <result column="variable_id" property="variableId" jdbcType="VARCHAR" />
+    <result column="variable_other_name" property="variableOtherName" jdbcType="VARCHAR" />
+    <result column="variable_name" property="variableName" jdbcType="VARCHAR" />
+    <result column="variable_full_name" property="variableFullName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    link_id, exp_id, variable_id, variable_other_name, variable_name, variable_full_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariablesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from export_plan_variables
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from export_plan_variables
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from export_plan_variables
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariablesExample" >
+    delete from export_plan_variables
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    insert into export_plan_variables (link_id, exp_id, variable_id, 
+      variable_other_name, variable_name, variable_full_name
+      )
+    values (#{linkId,jdbcType=INTEGER}, #{expId,jdbcType=INTEGER}, #{variableId,jdbcType=VARCHAR}, 
+      #{variableOtherName,jdbcType=VARCHAR}, #{variableName,jdbcType=VARCHAR}, #{variableFullName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    insert into export_plan_variables
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        link_id,
+      </if>
+      <if test="expId != null" >
+        exp_id,
+      </if>
+      <if test="variableId != null" >
+        variable_id,
+      </if>
+      <if test="variableOtherName != null" >
+        variable_other_name,
+      </if>
+      <if test="variableName != null" >
+        variable_name,
+      </if>
+      <if test="variableFullName != null" >
+        variable_full_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="expId != null" >
+        #{expId,jdbcType=INTEGER},
+      </if>
+      <if test="variableId != null" >
+        #{variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="variableOtherName != null" >
+        #{variableOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="variableName != null" >
+        #{variableName,jdbcType=VARCHAR},
+      </if>
+      <if test="variableFullName != null" >
+        #{variableFullName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariablesExample" resultType="java.lang.Integer" >
+    select count(*) from export_plan_variables
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update export_plan_variables
+    <set >
+      <if test="record.linkId != null" >
+        link_id = #{record.linkId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expId != null" >
+        exp_id = #{record.expId,jdbcType=INTEGER},
+      </if>
+      <if test="record.variableId != null" >
+        variable_id = #{record.variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.variableOtherName != null" >
+        variable_other_name = #{record.variableOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.variableName != null" >
+        variable_name = #{record.variableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.variableFullName != null" >
+        variable_full_name = #{record.variableFullName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update export_plan_variables
+    set link_id = #{record.linkId,jdbcType=INTEGER},
+      exp_id = #{record.expId,jdbcType=INTEGER},
+      variable_id = #{record.variableId,jdbcType=VARCHAR},
+      variable_other_name = #{record.variableOtherName,jdbcType=VARCHAR},
+      variable_name = #{record.variableName,jdbcType=VARCHAR},
+      variable_full_name = #{record.variableFullName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    update export_plan_variables
+    <set >
+      <if test="expId != null" >
+        exp_id = #{expId,jdbcType=INTEGER},
+      </if>
+      <if test="variableId != null" >
+        variable_id = #{variableId,jdbcType=VARCHAR},
+      </if>
+      <if test="variableOtherName != null" >
+        variable_other_name = #{variableOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="variableName != null" >
+        variable_name = #{variableName,jdbcType=VARCHAR},
+      </if>
+      <if test="variableFullName != null" >
+        variable_full_name = #{variableFullName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.ExportPlanVariables" >
+    update export_plan_variables
+    set exp_id = #{expId,jdbcType=INTEGER},
+      variable_id = #{variableId,jdbcType=VARCHAR},
+      variable_other_name = #{variableOtherName,jdbcType=VARCHAR},
+      variable_name = #{variableName,jdbcType=VARCHAR},
+      variable_full_name = #{variableFullName,jdbcType=VARCHAR}
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+</mapper>

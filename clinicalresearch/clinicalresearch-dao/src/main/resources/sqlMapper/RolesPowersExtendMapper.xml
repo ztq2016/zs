@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.RolesPowersExtendMapper">
+	<insert id="batchInsertRolesPowers" parameterType="list">
+		insert into ROLES_POWERS (roleid, powerid)
+		<foreach collection="list" item="rolePower" index="index"
+			separator=",">
+			values (#{rolePower.roleid,jdbcType=VARCHAR},
+			#{rolePower.powerid,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+
+	<select id="getUserMenus"  parameterType="string"  resultType="com.clinicalresearch.dao.entity.Powers">
+	SELECT
+		p.powerid,
+		p.pageurl,
+		p.menuname,
+		p.buttonname,
+		p.parent_id AS parentId ,
+		p.parent_ids AS parentIds
+	FROM POWERS p,ROLES_POWERS r,USERS_ROLES u
+	WHERE p.powerid=r.powerid AND r.roleid=u.roleid AND
+	p.powertype='menu' AND u.userid=#{userId} ORDER BY p.powerid
+	</select>
+</mapper>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.StudysExtendsMapper">
+
+
+	<select id="getStatusByIdCount" resultType="java.lang.Integer">
+		select count(1) from
+		STUDYS
+	</select>
+
+	<select id="getMaxStudyId" resultType="java.lang.String">
+		select max(studyid)
+		studyid from STUDYS
+	</select>
+	
+	<select id="getMaxGroupId" resultType="java.lang.String">
+		SELECT max(groupid)
+		groupid FROM SUBJECTGROUPS
+	</select>
+	
+	<select id="getListByFatherid"
+		resultType="com.clinicalresearch.dao.entity.HierarchicalVariableInfo">
+		select
+		variableid,variablename,variabletype,fatherid,vpycode,source,keycode,now
+		from HIERARCHICALVARIABLE where fatherid =
+		#{fatherid}
+	</select>
+
+	<select id="getFatherListById"
+		resultType="com.clinicalresearch.dao.entity.HierarchicalVariableInfo">
+		select
+		variableid,variablename,variabletype,fatherid,vpycode,source,keycode,now
+		from HIERARCHICALVARIABLE where variableid =
+		#{fatherid}
+	</select>
+
+	<select id="getUnitsById" resultType="com.clinicalresearch.dao.entity.Units">
+		SELECT
+		u.unittableid,u.unitid,u.unitname,u.unittype,u.isdefault FROM UNITS u
+		LEFT JOIN VARIABLEFIELDSUNITS v ON u.unittableid=v.relationid WHERE
+		1=1
+		and v.relationtype = 1 and
+		v.variableid = ${variableid}
+	</select>
+
+	<select id="getListByVariableName"
+		resultType="com.clinicalresearch.dao.entity.HierarchicalVariableInfo">
+		SELECT
+		variableid,variablename,variabletype,fatherid,vpycode,source,keycode,now
+		from HIERARCHICALVARIABLE where variablename like
+		'%${variablename}%'
+		GROUP BY fatherid
+	</select>
+
+
+	<select id="getFatherById"
+		resultType="com.clinicalresearch.dao.entity.HierarchicalVariableInfo">
+		select
+		variableid,variablename,variabletype,fatherid,vpycode,source,keycode,now
+		from HIERARCHICALVARIABLE where variableid =
+		#{fatherid}
+	</select>
+
+	<select id="getFieldById" resultType="com.clinicalresearch.dao.entity.IndicatorFields">
+		SELECT
+		i.fieldtableid,
+		i.fieldid,
+		i.fieldname,
+		i.fieldtype,
+		i.fieldvalue,
+		i.fieldversion,
+		i.fielddesc
+		FROM
+		INDICATORFIELDS i
+		LEFT JOIN(
+		SELECT
+		a.relationid
+		FROM
+		VARIABLEFIELDSUNITS a
+		WHERE
+		a.relationtype = 0
+		AND variableid = ${variableid}
+		)v ON i.fieldtableid = v.relationid
+		WHERE
+		v.relationid IS NOT NULL
+		AND i.fieldname IS NOT NULL 
+		AND i.${queryname} LIKE '%${fieldname}%' 
+		ORDER BY i.fieldname 
+		LIMIT ${index},${pageSize} ;
+
+	</select>
+
+	<!-- 根据拼音检索相关值 -->
+	<select id="getListByPY"
+		resultType="com.clinicalresearch.dao.entity.HierarchicalVariableInfo">
+		select
+		variableid,variablename,variabletype,fatherid,vpycode,source,keycode,now
+		from HIERARCHICALVARIABLE where vpycode like
+		'%${variablename}%'
+	</select>
+
+	<!--根据条件 查询值域总条数 -->
+	<select id="getFieldCount" resultType="java.lang.Integer">
+		SELECT
+		count(1)
+		FROM
+		INDICATORFIELDS i
+		LEFT JOIN(
+		SELECT
+		a.relationid
+		FROM
+		VARIABLEFIELDSUNITS a
+		WHERE
+		a.relationtype = 0
+		AND variableid = ${variableid}
+		)v ON i.fieldtableid = v.relationid
+		WHERE
+		v.relationid IS NOT NULL
+		AND i.${queryname} LIKE '%${fieldname}%'
+
+	</select>
+
+
+	<select id="getStatisticalModelById"
+		resultType="com.clinicalresearch.dao.entity.StatisticalModelResultInfo">
+		SELECT * FROM STATISTICALMODEL where fatherid
+		<if test="fatherid != null">
+			= ${fatherid}
+		</if>
+
+		<if test="fatherid == null">
+			IS NULL
+		</if>
+
+	</select>
+
+	<!-- 字典查询 -->
+	<select id="getFieldDictByName" resultType="com.clinicalresearch.dao.entity.IndicatorFields">
+		SELECT * FROM INDICATORFIELDS WHERE fielddesc = '${fielddesc}'
+		AND ${queryname} LIKE '%${fieldname}%' LIMIT 10
+	</select>
+
+	<insert id="savePatients" parameterType="com.clinicalresearch.dao.entity.EsHits">
+		INSERT INTO
+		patient_basic (patientid,patientids,studyid)
+		VALUES(#{patientid},#{patientids},#{studyid});
+	</insert>
+
+	<select id="getPaientBasicList" resultType="com.clinicalresearch.dao.entity.PatientBasic">
+		SELECT patientid FROM patient_basic WHERE studyid = #{studyid}
+	</select>
+
+	<select id="getInclusionCriteriaById" resultType="com.clinicalresearch.dao.entity.InclusionCriteria">
+		SELECT criteriaid,criteriaexpression,istrue,studyid FROM
+		INCLUSIONCRITERIA WHERE studyid=#{studyid}
+	</select>
+
+	<select id="getMaxCriteriaId" resultType="java.lang.String">
+		SELECT MAX(criteriaid) criteriaid FROM INCLUSIONCRITERIA
+	</select>
+
+	<delete id="deletePatientsById" parameterType="com.clinicalresearch.dao.entity.PatientBasic">
+		DELETE FROM patient_basic where studyid =#{studyid}
+	</delete>
+	
+	<!-- 根据studyid查询 -->
+	<select id="getPatienByStudyid" resultType="com.clinicalresearch.dao.entity.PatientBasic" >
+		SELECT patientid,patientids,studyid FROM patient_basic WHERE studyid = #{studyid}
+	</select>
+	
+	<select id="getByPatients" resultType="java.lang.String" >
+		SELECT expression FROM INCLUSIONCRITERIA WHERE studyid = #{studyid}
+	</select>
+	
+	<select id="getInclusionCriteriaList" resultType="java.lang.String" >
+		SELECT criteriaexpression FROM INCLUSIONCRITERIA WHERE studyid = #{studyid}
+	</select>
+	
+	<select id="getSubjectGroups" resultType="java.lang.String" >
+		SELECT groupcondition FROM SUBJECTGROUPS WHERE groupcondition IS NOT NULL AND studyid = #{studyid}
+	</select>
+	
+	<select id="getStudysList" resultType="com.clinicalresearch.dao.entity.Studys" >
+		SELECT typename studytype , s.studyobjective ,s.statisticalmodel ,s.interventionmodel FROM STUDYTYPE t LEFT JOIN STUDYS s ON t.typeid = s.studytype WHERE s.studyid = #{studyid}
+	</select>
+	
+	<select id="checkGroupcondition" resultType="com.clinicalresearch.dao.entity.SubjectGroups" >
+		SELECT groupcondition FROM  SUBJECTGROUPS WHERE studyid  = #{studyid} 
+	</select>
+	
+	<delete id="deleteGroupcondition" parameterType="com.clinicalresearch.dao.entity.SubjectGroups">
+		DELETE FROM SUBJECTGROUPS WHERE studyid = #{studyid} 
+	</delete>
+	
+	<select id="getInclusionExp" resultType="java.lang.String" >
+		SELECT expression FROM INCLUSIONCRITERIA WHERE studyid = #{studyid}
+	</select>
+	<!-- 更新项目进度 -->
+	<update id="updateStatusById" parameterType="com.clinicalresearch.dao.entity.Studys" >
+		UPDATE STUDYS SET state = #{state} WHERE studyid = #{studyid}
+	</update>
+</mapper>

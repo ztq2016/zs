@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.ExportFileMetaMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    <id column="file_id" property="fileId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_start_time" property="fileStartTime" jdbcType="TIMESTAMP" />
+    <result column="file_end_time" property="fileEndTime" jdbcType="TIMESTAMP" />
+    <result column="file_size" property="fileSize" jdbcType="VARCHAR" />
+    <result column="file_process_per" property="fileProcessPer" jdbcType="VARCHAR" />
+    <result column="file_status" property="fileStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.clinicalresearch.dao.entity.ExportFileMeta" extends="BaseResultMap" >
+    <result column="file_exp" property="fileExp" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    file_id, user_id, file_path, file_name, file_start_time, file_end_time, file_size, 
+    file_process_per, file_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    file_exp
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.clinicalresearch.dao.entity.ExportFileMetaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from export_file_meta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clinicalresearch.dao.entity.ExportFileMetaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from export_file_meta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from export_file_meta
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from export_file_meta
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clinicalresearch.dao.entity.ExportFileMetaExample" >
+    delete from export_file_meta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fileId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into export_file_meta (user_id, file_path, file_name, 
+      file_start_time, file_end_time, file_size, 
+      file_process_per, file_status, file_exp
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+      #{fileStartTime,jdbcType=TIMESTAMP}, #{fileEndTime,jdbcType=TIMESTAMP}, #{fileSize,jdbcType=VARCHAR}, 
+      #{fileProcessPer,jdbcType=VARCHAR}, #{fileStatus,jdbcType=VARCHAR}, #{fileExp,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fileId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into export_file_meta
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="fileStartTime != null" >
+        file_start_time,
+      </if>
+      <if test="fileEndTime != null" >
+        file_end_time,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
+      </if>
+      <if test="fileProcessPer != null" >
+        file_process_per,
+      </if>
+      <if test="fileStatus != null" >
+        file_status,
+      </if>
+      <if test="fileExp != null" >
+        file_exp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStartTime != null" >
+        #{fileStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileEndTime != null" >
+        #{fileEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileProcessPer != null" >
+        #{fileProcessPer,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        #{fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExp != null" >
+        #{fileExp,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clinicalresearch.dao.entity.ExportFileMetaExample" resultType="java.lang.Integer" >
+    select count(*) from export_file_meta
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update export_file_meta
+    <set >
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePath != null" >
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileStartTime != null" >
+        file_start_time = #{record.fileStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileEndTime != null" >
+        file_end_time = #{record.fileEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileSize != null" >
+        file_size = #{record.fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileProcessPer != null" >
+        file_process_per = #{record.fileProcessPer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileStatus != null" >
+        file_status = #{record.fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileExp != null" >
+        file_exp = #{record.fileExp,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update export_file_meta
+    set file_id = #{record.fileId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_start_time = #{record.fileStartTime,jdbcType=TIMESTAMP},
+      file_end_time = #{record.fileEndTime,jdbcType=TIMESTAMP},
+      file_size = #{record.fileSize,jdbcType=VARCHAR},
+      file_process_per = #{record.fileProcessPer,jdbcType=VARCHAR},
+      file_status = #{record.fileStatus,jdbcType=VARCHAR},
+      file_exp = #{record.fileExp,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update export_file_meta
+    set file_id = #{record.fileId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_start_time = #{record.fileStartTime,jdbcType=TIMESTAMP},
+      file_end_time = #{record.fileEndTime,jdbcType=TIMESTAMP},
+      file_size = #{record.fileSize,jdbcType=VARCHAR},
+      file_process_per = #{record.fileProcessPer,jdbcType=VARCHAR},
+      file_status = #{record.fileStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    update export_file_meta
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStartTime != null" >
+        file_start_time = #{fileStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileEndTime != null" >
+        file_end_time = #{fileEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileProcessPer != null" >
+        file_process_per = #{fileProcessPer,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        file_status = #{fileStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fileExp != null" >
+        file_exp = #{fileExp,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    update export_file_meta
+    set user_id = #{userId,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_start_time = #{fileStartTime,jdbcType=TIMESTAMP},
+      file_end_time = #{fileEndTime,jdbcType=TIMESTAMP},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      file_process_per = #{fileProcessPer,jdbcType=VARCHAR},
+      file_status = #{fileStatus,jdbcType=VARCHAR},
+      file_exp = #{fileExp,jdbcType=LONGVARCHAR}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clinicalresearch.dao.entity.ExportFileMeta" >
+    update export_file_meta
+    set user_id = #{userId,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_start_time = #{fileStartTime,jdbcType=TIMESTAMP},
+      file_end_time = #{fileEndTime,jdbcType=TIMESTAMP},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      file_process_per = #{fileProcessPer,jdbcType=VARCHAR},
+      file_status = #{fileStatus,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+</mapper>

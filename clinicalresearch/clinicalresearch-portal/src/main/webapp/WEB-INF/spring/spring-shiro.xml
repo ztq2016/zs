@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  															
+															
+ http://www.springframework.org/schema/beans/spring-beans.xsd   															
+ http://www.springframework.org/schema/aop    															
+ http://www.springframework.org/schema/aop/spring-aop.xsd   															
+ http://www.springframework.org/schema/jee    															
+ http://www.springframework.org/schema/jee/spring-jee.xsd   															
+ http://www.springframework.org/schema/lang    															
+ http://www.springframework.org/schema/lang/spring-lang.xsd   															
+ http://www.springframework.org/schema/context    															
+ http://www.springframework.org/schema/context/spring-context.xsd   															
+ http://www.springframework.org/schema/tx    															
+ http://www.springframework.org/schema/tx/spring-tx.xsd   															
+ http://www.springframework.org/schema/util    															
+ http://www.springframework.org/schema/util/spring-util.xsd   															
+ http://www.springframework.org/schema/mvc    															
+ http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- shiro缓存插件 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+	<!-- 会话管理器 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionIdUrlRewritingEnabled" value="false" />
+		<!-- session的失效时长，单位毫秒 -->
+        <!-- 		<property name="globalSessionTimeout" value="600000" /> -->
+		<!-- 删除失效的session -->
+		<!-- <property name="deleteInvalidSessions" value="true" /> -->
+	</bean>
+
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myRealm" />
+		<!-- 注入session管理器 -->
+		<property name="sessionManager" ref="sessionManager" />
+		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+
+	<!-- 自定义Realm -->
+	<bean id="myRealm" class="com.clinicalresearch.shiro.MyRealm" />
+
+	<bean id="rolesAuthor" class="com.clinicalresearch.shiro.CustomRolesAuthor" />
+	<!-- Shiro过滤器 -->
+	<bean id="shiroFilter" class="com.clinicalresearch.shiro.ShiroPermissionFactory">
+		<!-- Shiro的核心安全接口,这个属性是必须的 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 身份认证失败，则跳转到登录页面的配置 -->
+		<property name="loginUrl" value="/login" />
+		<!-- 权限认证失败，则跳转到指定页面 -->
+		<property name="unauthorizedUrl" value="/index" />
+		<!-- 自定义filter配置 -->
+		<property name="filters">
+			<util:map>
+				<!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中 -->
+				<entry key="roles" value-ref="rolesAuthor" />
+		
+			</util:map>
+		</property>
+		<!-- Shiro连接约束配置,即过滤链的定义 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!--静态资源 匿名访问无需认证 -->
+				/assets/**=anon
+				/css/**=anon
+				/js/**=anon
+				/fonts/**=anon
+				/img/**=anon
+				<!--登录 匿名访问无需认证 -->
+				/login=anon
+				/entryHome=anon
+				<!--退出 logout直接推出 -->
+				/logout = logout
+			</value>
+		</property>
+	</bean>
+	<!-- 开启Shiro注解 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor" />
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>															

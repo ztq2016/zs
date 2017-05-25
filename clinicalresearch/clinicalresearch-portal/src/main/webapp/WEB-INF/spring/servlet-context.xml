@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        ">
+
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+    
+
+    <mvc:resources location="/WEB-INF/views/assets/" mapping="/assets/**"/>
+    <mvc:resources location="/WEB-INF/views/fonts/" mapping="/fonts/**"/>
+    <mvc:resources location="/WEB-INF/views/css/" mapping="/css/**"/>
+    
+    <mvc:resources location="/WEB-INF/views/img/" mapping="/img/**"/>
+    <mvc:resources location="/WEB-INF/views/js/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/" mapping="/views/**"/>
+  <!--  启动mvc的url映射功能 -->
+  <mvc:annotation-driven/>
+ 
+  <beans:bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></beans:bean>
+    
+	<beans:bean
+        class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+ 		<beans:property name="messageConverters">
+ 			
+			<util:list>
+				<beans:ref bean="byteArray"/>
+				<beans:ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</beans:property>
+	</beans:bean>
+    <beans:bean id="byteArray" class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></beans:bean>
+	<beans:bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<beans:property name="supportedMediaTypes">
+			<beans:list>
+                <beans:value>application/json;charset=UTF-8</beans:value>
+                <!-- <beans:value>text/html;charset=UTF-8</beans:value> -->
+			</beans:list>
+		</beans:property>
+        <beans:property name="objectMapper">
+            <beans:bean class="org.clinicalresearch.utils.JsonMapper"/>
+        </beans:property>
+	</beans:bean>
+	
+	
+	<beans:import resource="controllers.xml" />
+    
+   <!--  <mvc:interceptors>
+        登陆拦截器
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <beans:bean
+                class="com.clinicalresearch.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors> -->
+    <mvc:view-controller path="/" view-name="/login"/>
+</beans:beans>

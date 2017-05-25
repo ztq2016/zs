@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clinicalresearch.dao.manager.VariableFieldsUnitsExtendsMapper" >
+  <resultMap id="BaseResultMap" type="com.clinicalresearch.dao.entity.VariableFieldsUnits" >
+    <result column="variableid" property="variableid" jdbcType="VARCHAR" />
+    <result column="relationid" property="relationid" jdbcType="VARCHAR" />
+    <result column="relationtype" property="relationtype" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="com.clinicalresearch.dao.entity.VariableFieldsUnits">
+ 	insert into VARIABLEFIELDSUNITS (variableid, relationid, relationtype
+      )
+    values
+    <foreach collection="list" item="f"  separator="," close=";">
+     (#{f.variableid,jdbcType=VARCHAR}, #{f.relationid,jdbcType=VARCHAR}, #{f.relationtype,jdbcType=VARCHAR})
+     </foreach>
+  </insert>
+</mapper>

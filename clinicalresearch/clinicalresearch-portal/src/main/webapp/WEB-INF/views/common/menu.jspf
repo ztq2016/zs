@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+	<div class="page-sidebar navbar-collapse collapse">
+		<ul class="page-sidebar-menu page-sidebar-menu-light "
+			data-keep-expanded="false" data-auto-scroll="false"
+			data-slide-speed="200">
+			<li class="sidebar-toggler-wrapper">
+				<div class="logo">
+					<img src="img/logo.png" class="iconlogo" /> <img
+						src="img/logoimg.png" class="iconlogos" />
+				</div> <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+				<div class="sidebar-toggler"></div> <!-- END SIDEBAR TOGGLER BUTTON -->
+			</li>
+			<li class="sidebar-user-wrapper noshow"><img src="img/user.png"
+				alt="用户头像" class="userinfo-btn" /> <b class="uname userinfo-btn">${user.realname }</b>
+				<i class="fa fa-caret-down userinfo-btn"></i><br> <span
+				class="userinfo-arrow"></span>
+				<ul class="userinfo hidden">
+					<li><a href="page_user">个人信息 </a></li>
+					<li><a href="page_help" name="help" id="help"> 帮助 </a> <span
+						class="label label-success label-sm" style="float: right;">help
+					</span></li>
+
+					<li class="exit-li"><a href="logout"> 退出登录 </a></li>
+				</ul> <span id="qx" class="userinfo-btn">管理员</span><span class="noshow">，欢迎您！</span>
+			</li>
+			<c:forEach items="${userMenus }" var="menu" varStatus="st">
+				<c:if test="${menu.parentId==''}">
+					<li id="menu_${st.index}"
+						<c:if test="${st.index==0 }"> class="start  open"</c:if>>
+						<a id="menua_${st.index}"
+						href="<%=request.getContextPath() %>${menu.pageurl}"> <i
+							id="menuIcon_${st.index}"></i> <span class="title">${menu.buttonname}</span>
+							<span id="menu_arrow_${st.index}" class="arrow "></span>
+					</a>
+				</c:if>
+				<c:forEach items="${userMenus }" var="subMenu" varStatus="id">
+					<c:if test="${subMenu.parentId == menu.powerid}">
+						<ul class="sub-menu">
+							<li><a href="#"> <i class="icon-user"></i>
+									${subMenu.buttonname }
+							</a></li>
+						</ul>
+					</c:if>
+				</c:forEach>
+				</li>
+
+
+			</c:forEach>
+			<%-- 			<li class="start active open">
+					<a href="<%=request.getContextPath() %>/index">
+					<i class="myicon home"></i>
+					<span class="title">课题管理</span>			
+					</a>
+				</li>
+			    <li>
+					<a href="exploration">
+					<i class="myicon rocket"></i>
+					<span class="title">问题挖掘</span>
+					</a>
+				</li>
+				<li >
+					<a target="_blank">
+					<i class="myicon gears"></i>
+					<span class="title">系统设置 </span>
+					</a>
+				</li> --%>
+
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>

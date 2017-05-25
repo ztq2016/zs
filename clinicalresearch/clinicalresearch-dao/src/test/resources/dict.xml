@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<variable>
+		<id>000027</id>
+		<name>性别</name>
+		<value>性别码</value>
+		
+		<id1>000030</id1>
+		<name1>国籍</name1>
+		<value1>国家名称</value1>
+		
+		<id2>000031</id2>
+		<name2>民族</name2>
+		<value2>民族码</value2>
+		
+		<id3>000032</id3>
+		<name3>职业</name3>
+		<value3>职业代码（病人）</value3>
+		
+		<id4>000141</id4>
+		<name4>文化程度</name4>
+		<value4>文化程度</value4>
+		
+		<id5>000033</id5>
+		<name5>婚姻状况</name5>
+		<value5>婚姻状况类别代码</value5>
+		
+		<id6>000142</id6>
+		<name6>病人身份</name6>
+		<value6>病人身份字典</value6>
+		
+		<id7>000034</id7>
+		<name7>付费方式</name7>
+		<value7>医疗付费方式码</value7>
+		
+		<id8>000036</id8>
+		<name8>入院途径</name8>
+		<value8>入院途径</value8>
+		
+		<id9>000038</id9>
+		<name9>入院科室</name9>
+		<value9>科室字典</value9>
+		
+		<id10>000040</id10>
+		<name10>出院科室</name10>
+		<value10>科室字典</value10>
+		
+		<id11>000143</id11>
+		<name11>入院状态</name11>
+		<value11>入院状态</value11>
+		
+		<id12>000144</id12>
+		<name12>病情转归</name12>
+		<value12>病情转归代码表</value12>
+		
+		<id13>000080</id13>
+		<name13>出院诊断</name13>
+		<value13>国际疾病分类（ICD）-电子病历</value13>
+		
+		
+		<id14>000082</id14>
+		<name14>门(急)诊诊断</name14>
+		<value14>门诊诊断字典</value14>
+		
+		<id15>000083</id15>
+		<name15>病理诊断</name15>
+		<value15>病理诊断</value15>
+		
+		<id16>000084</id16>
+		<name16>死亡诊断</name16>
+		<value16>国际疾病分类（ICD）-电子病历</value16>
+		
+		<id17>000104</id17>
+		<name17>药物类型</name17>
+		<value17>药物类型代码</value17>
+		
+		<id18>000102</id18>
+		<name18>药品名称</name18>
+		<value18>药品字典</value18>
+		
+		<id19>000105</id19>
+		<name19>用药途径</name19>
+		<value19>用药途径代码</value19>
+		
+		<id20>000106</id20>
+		<name20>用药频次</name20>
+		<value20>常用频率字典</value20>
+		
+		<id21></id21>
+		<name21>药物类型</name21>
+		<value21>药物类型代码</value21>
+		
+		<id22>000111</id22>
+		<name22>药品名称</name22>
+		<value22>药品字典</value22>
+		
+		<id23>000112</id23>
+		<name23>用药途径</name23>
+		<value23>用药途径代码</value23>
+		
+		<id24>000113</id24>
+		<name24>用药频次</name24>
+		<value24>常用频率字典</value24>
+		
+		<id25>000023</id25>
+		<name25>检验类型</name25>
+		<value25>检验类型字典</value25>
+		
+		<id26>000117</id26>
+		<name26>检验项目</name26>
+		<value26>检验项目字典</value26>
+		
+		<id27>000025</id27>
+		<name27>检查项目</name27>
+		<value27>检查项目字典</value27>
+		
+		<id28></id28>
+		<name28>检查部位</name28>
+		<value28>检查部位</value28>
+		
+		<id29>000131</id29>
+		<name29>手术名称</name29>
+		<value29>手术与操作字典</value29>
+		
+		<id30></id30>
+		<name30>手术级别</name30>
+		<value30>手术级别代码表</value30>
+		
+		<id31>000132</id31>
+		<name31>术前诊断</name31>
+		<value31>国际疾病分类（ICD）-电子病历</value31>
+		
+		<id32>000133</id32>
+		<name32>术后诊断</name32>
+		<value32>国际疾病分类（ICD）-电子病历</value32>
+		
+		<id33>000134</id33>
+		<name33>切口类型</name33>
+		<value33>手术切口等级代码</value33>
+		
+		<id34></id34>
+		<name34>愈合程度</name34>
+		<value34>切口愈合等级代码</value34>
+		
+		<id35>000136</id35>
+		<name35>麻醉方式</name35>
+		<value35>麻醉方式</value35>
+		
+		<id36>000081</id36>
+		<name36>入院诊断</name36>
+		<value36>国际疾病分类（ICD）-电子病历</value36>
+	</variable>
+	<unit>
+	</unit>
+</config>
