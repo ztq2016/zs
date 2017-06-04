@@ -10,6 +10,7 @@ public class UserController {
 	
 	@RequestMapping("/register")
 	public ModelAndView register() {
+		//test
 		return new ModelAndView("register");
 	}
 	
