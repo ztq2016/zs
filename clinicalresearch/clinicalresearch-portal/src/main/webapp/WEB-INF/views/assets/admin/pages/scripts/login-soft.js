@@ -54,7 +54,7 @@ var Login = function () {
                         data:{userId:$("#form_control_1").val(),password:$("#form_control_2").val()},
                         success:function(result){
 	                     	  if(result!="200"){
-	                     		 $('.alert-danger', $('.login-form')).show();
+	                     		 $('.forget-form').removeClass("hidden");
 	                     		 $('.alert-danger').find("span").html("登录失败请重新输入！");
 	                     	  }else{
 	                     		  window.location.href=url.substr(0,url.lastIndexOf("/"))+"/index";
