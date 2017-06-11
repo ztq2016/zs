@@ -90,6 +90,9 @@ public class HomeController {
 	@RequestMapping("/entryHome")
 	@ResponseBody
 	public String entryHome(RedirectAttributes attr, String userId, String password, HttpServletRequest request) {
+		
+		System.out.println("entryHome:" + userId);
+		
 		if (!StringUtils.isBlank(userId) && !StringUtils.isBlank(password)) {
 			System.out.println("登录成功！");
 			// new 一个subject对象出来
@@ -132,7 +135,10 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/index")
 	public ModelAndView homeView(HttpServletRequest request) {
+		
 		String userId = request.getSession().getAttribute("userId").toString();
+		System.out.println(userId == null);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		/* 总条数 */
 		int allStudyCount = studysService.getAllStudyCount(userId);

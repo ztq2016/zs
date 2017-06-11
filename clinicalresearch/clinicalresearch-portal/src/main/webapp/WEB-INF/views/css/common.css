@@ -1,0 +1,161 @@
+.caret {
+	margin-top: 0px !important;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+b, strong {
+    font-weight: 700;
+}
+.m-t-xs {
+    margin-top: 5px;
+}
+.block {
+    display: block;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: #fff;
+}
+.open>a {
+    outline: 0;
+}
+.clear {
+    display: block;
+    overflow: hidden;
+}
+a,a:hover,a:active,a:focus {
+    text-decoration: none;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: #fff;
+}
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+        border-radius: 3px;
+    color: inherit;
+    line-height: 25px;
+    margin: 4px;
+    text-align: left;
+    font-weight: normal;
+}
+.dropdown-menu>li>a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #f5f5f5, #f5f5f5);
+}
+.navbar-fixed-top, .navbar-static-top {
+    background: #f3f3f4;
+    z-index: 100;
+}
+.navbar {
+    border: 0;
+    min-height: 50px;
+}
+.border-bottom {
+    border-bottom: 1px solid #e7eaec !important;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.btn-group-vertical>.btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluid:after, .container:after, .dl-horizontal dd:after, .form-horizontal .form-group:after, .modal-footer:after, .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
+    clear: both;
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
+.navbar .btn, .navbar .btn-group {
+    margin-top: 0px;
+}
+.btn-blank{
+	    background: #f3f3f4 !important;
+	    box-shadow: none;
+	    border: 0px;
+	    color:#888 ;
+	    padding: 4px 0px !important;
+}
+.btn-group+.btn-group{margin-left: 20px;}
+.btn.btn-blank.active, .btn.btn-blank:active{
+	box-shadow: none;
+}
+.m-r-sm {
+    margin-right: 10px;
+}
+.text-muted {
+    color: #888888;
+}
+.btn-blank i.fa{color:#337ab7;display:inline-block;padding: 20px 10px;}
+.btn-blank i.fa:hover{color: #23527c;}
+.popover-info{display: inline-block;margin-left: 5px;}
+.arrow {
+    float: right;
+        padding: 5px 3px;
+}
+.fa.arrow:before {
+    content: "\f104";
+}
+.active .fa.arrow:before {
+    content: "\f107";
+}
+.navbar.navbar-static-top{margin-left: 200px;}
+.devpreview .navbar.navbar-static-top,.sourcepreview .navbar.navbar-static-top{
+animation: myfirst 0.3s linear 0s;
+animation-fill-mode:forwards;
+/* Firefox: */
+-moz-animation: myfirst 0.3s linear 0s;
+/* Safari 和 Chrome: */
+-webkit-animation: myfirst 0.3s linear 0s ;
+-webkit-animation-fill-mode:forwards;
+/* Opera: */
+-o-animation: myfirst 0.3s linear 0s;
+-o-animation-fill-mode:forwards;
+}
+
+@keyframes myfirst
+{
+0%   {margin-left: 200px;}
+100%   {margin-left: 20px;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0%   {margin-left: 200px;}
+100%   {margin-left: 20px;}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+0%   {margin-left: 200px;}
+100%   {margin-left: 20px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0%   {margin-left: 200px;}
+100%   {margin-left: 20px;}
+}
+.btn,button,.btn:active,button:active{outline: none !important;}
+.label-important{
+	background:#b94a48 !important;
+}
+.drag.label{background: #999999;}
+.files p.name>input{ 
+	padding: 10px 20px;
+    height: 30px;
+    width: 100%;
+    margin-left: -30px;}
