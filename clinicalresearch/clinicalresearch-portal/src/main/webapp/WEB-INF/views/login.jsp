@@ -27,32 +27,34 @@
 
             </div>
             <h3>欢迎使用 A+</h3>
-            <form class="m-t" role="form" action="index.html">
+
+            <form class="login-form" action="<%=request.getContextPath() %>/entryHome" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="用户名" required="required" id="form_control_1">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="密码" required="required" id="form_control_2">
                 </div>
-                <br><br>
-                <div class="forget-form hidden">
-					<div class="alert alert-danger display-hide">
+               <div class="forget-form hidden">
+					<div class="alert alert-danger">
 						<button class="close" data-close="alert"></button>
 						<span>请输入账号和密码! </span>					
 					</div>
 				</div>
+               
                 <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
 
                 <p class="text-muted text-center"> 
                 	<a ><small>还没有账号？</small></a> |
-                	<a href="register.html">注册一个新账号</a>
+                	<a href="register">注册一个新账号</a>
                 </p>
 
             </form>
         </div>
     </div>
 
+    <!-- Mainly scripts -->
 <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

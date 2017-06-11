@@ -26,6 +26,7 @@
     
     <mvc:resources location="/WEB-INF/views/img/" mapping="/img/**"/>
     <mvc:resources location="/WEB-INF/views/js/" mapping="/js/**"/>
+     <mvc:resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"/>
     <mvc:resources location="/WEB-INF/" mapping="/views/**"/>
   <!--  启动mvc的url映射功能 -->
   <mvc:annotation-driven/>
