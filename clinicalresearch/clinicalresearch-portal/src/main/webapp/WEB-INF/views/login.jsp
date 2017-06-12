@@ -38,7 +38,7 @@
                <div class="forget-form hidden">
 					<div class="alert alert-danger">
 						<button class="close" data-close="alert"></button>
-						<span>请输入账号和密码! </span>					
+						<span>请输入账号和密码! </span>	
 					</div>
 				</div>
                
@@ -48,6 +48,8 @@
                 <p class="text-muted text-center"> 
                 	<a ><small>还没有账号？</small></a> |
                 	<a href="register">注册一个新账号</a>
+                	<img src="jcaptcha.jpg" id="img"/> 
+					<input type="text" name="jcaptcha" value="" id="jcaptcha" />				
                 </p>
 
             </form>
@@ -76,7 +78,7 @@ jQuery(document).ready(function() {
 Layout.init(); // init current layout
   Login.init();
   Demo.init();
-      
+    
 });
 </script>
 <!-- END JAVASCRIPTS -->
