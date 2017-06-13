@@ -48,8 +48,7 @@
                 <p class="text-muted text-center"> 
                 	<a ><small>还没有账号？</small></a> |
                 	<a href="register">注册一个新账号</a>
-                	<img src="jcaptcha.jpg" id="img"/> 
-					<input type="text" name="jcaptcha" value="" id="jcaptcha" />				
+                					
                 </p>
 
             </form>

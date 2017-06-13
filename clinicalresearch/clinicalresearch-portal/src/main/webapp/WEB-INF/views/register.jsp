@@ -14,6 +14,31 @@
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=2.2.0" rel="stylesheet">
+     <script>
+  
+       
+          
+            function imgChange(){
+            	$.ajax({
+          		   type: "get",
+                     url: '/clinicalresearch-portal/register',
+                     success:function(result){
+                    	
+                    	
+                         	  
+                     }
+          		});
+            }
+       
+    </script>
+    <style>
+      #img{
+          float: right;
+    width: 150px;}
+      input{    
+      width: 120px;
+    margin: 30px 0px;}
+    </style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -25,16 +50,18 @@
             </div>
             <h3>欢迎注册 A+</h3>
             <p>创建一个A+新账户</p>
-            <form class="m-t" role="form" action="login.html">
+            <form class="m-t" role="form" action="<%=request.getContextPath() %>/addUser" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="请输入用户名" required="">
+                    <input type="text" class="form-control" placeholder="请输入用户名" required="" name="userName">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="请输入密码" required="">
+                    <input type="password" class="form-control" placeholder="请输入密码" required="" name="password">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="请再次输入密码" required="">
+                    <input type="password" class="form-control" placeholder="真实姓名" required="" name="realName">
                 </div>
+                <img src="jcaptcha.jpg" id="img"/ onclick=" document.location.reload();" title="点击刷新验证码" alt="图形验证码"> 
+					<input type="text" name="jcaptcha" value="" id="jcaptcha" />
                 <div class="form-group text-left">
                     <div class="checkbox i-checks">
                         <label class="no-padding">
@@ -54,11 +81,13 @@
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
     <script>
+  
         $(document).ready(function () {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
+           
         });
     </script>
 </body>
