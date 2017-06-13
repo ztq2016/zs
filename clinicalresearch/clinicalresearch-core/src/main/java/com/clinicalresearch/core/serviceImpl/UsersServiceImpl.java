@@ -344,4 +344,34 @@ public class UsersServiceImpl implements UsersService {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean userExist(String userId) {
+		Users selectByPrimaryKey = usersMapper.selectByPrimaryKey(userId);
+		if (selectByPrimaryKey != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void addUser(String userId, String password,String realName) {
+		//添加用户
+		Users record = new Users();
+		record.setUserid(userId);
+		record.setPwd(password);
+		record.setRealname(realName);
+		usersMapper.insert(record);
+		
+		//添加权限
+		List<Roles> selectByExample = rolesMapper.selectByExample(null);
+		for (Roles role : selectByExample) {
+			UsersRolesKey roleUser = new UsersRolesKey();
+			roleUser.setRoleid(role.getRoleid());
+			roleUser.setUserid(userId);
+			usersRolesMapper.insert(roleUser);
+		}
+		
+	}
 }
