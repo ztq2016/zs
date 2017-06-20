@@ -28,6 +28,7 @@ import com.clinicalresearch.core.bean.ExportFile;
 import com.clinicalresearch.core.bean.ExportPlanBean;
 import com.clinicalresearch.core.bean.ExportVariable;
 import com.clinicalresearch.core.bean.FileMessage;
+import com.clinicalresearch.core.service.CreateFileService;
 import com.clinicalresearch.core.service.DataExportService;
 import com.clinicalresearch.model.CreateExportPlanRequest;
 import com.google.gson.Gson;
@@ -44,8 +45,30 @@ public class ExportDataController {
 	@Autowired
 	private DataExportService dataExportService;
 	
+	@Autowired
+	private CreateFileService createFileService;
+	
 	private static final Gson gson = new Gson();
 	
+	
+	@RequestMapping("/saveFile")
+	@ResponseBody
+	public void saveFile(@RequestBody Map<String,Object> map) {
+		createFileService.createFile(map.get("userId").toString(), map.get("fileContent").toString());
+	}
+	
+	@RequestMapping("/deleteFile")
+	@ResponseBody
+	public Object deleteFile(HttpServletRequest request,@RequestBody Map<String,Object> map) {
+		Object object = map.get("fileId");
+		if (object != null) {
+			int parseInt = Integer.parseInt(object.toString());
+			createFileService.deleteDownLoadFile(parseInt);
+		}
+		String userId = (String)request.getSession().getAttribute("userId");
+		List<ExportFile> queryExportFileList = dataExportService.queryExportFileList(userId);
+		return queryExportFileList;
+	}
 	
 	/**
 	 * 查询已经存在的变量导出计划与变量列表

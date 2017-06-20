@@ -404,15 +404,27 @@ public class DataExportServiceImpl implements DataExportService {
 		record.setFileStatus("0");
 		exportFileMetaMapper.insert(record);
 		
+		File file = new File(fileName);
+		try {
+			FileWriter fileWriter = new FileWriter(file);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(exp);
+			bufferedWriter.flush();
+			bufferedWriter.close();
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		/*调用新的线程*/
-		Integer fileId = record.getFileId();
-		ExportThread exportThread = new ExportThread();
-		exportThread.setExp(exp);
-		exportThread.setFilePath(fileName);
-		exportThread.setFileId(fileId);
-		exportThread.setExportFileMetaMapper(exportFileMetaMapper);
-		exportThread.start();
+		
+//		/*调用新的线程*/
+//		Integer fileId = record.getFileId();
+//		ExportThread exportThread = new ExportThread();
+//		exportThread.setExp(exp);
+//		exportThread.setFilePath(fileName);
+//		exportThread.setFileId(fileId);
+//		exportThread.setExportFileMetaMapper(exportFileMetaMapper);
+//		exportThread.start();
 		
 	}
 	
