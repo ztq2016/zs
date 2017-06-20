@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.clinicalresearch.core.service.UsersService;
+import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
 
 @Controller
 public class UserController {
-	
-	@Autowired
-	private com.octo.captcha.service.image.ImageCaptchaService imageCaptchaService;
 	
 	@Autowired
 	private UsersService usersService; 
@@ -34,11 +32,10 @@ public class UserController {
 			@RequestParam("realName") String realName
 			) {
 		  String captchaId = request.getSession().getId();   
-		  
-		Boolean validateResponseForID = imageCaptchaService.validateResponseForID(captchaId, captcha);
-		if (validateResponseForID) {
+		  boolean validateResponse = SimpleImageCaptchaServlet.validateResponse(request, captcha);
+		if (!validateResponse) {
 			ModelAndView modelAndView = new ModelAndView("register");
-			modelAndView.addObject("errorMsg", "验证码错误。");
+			modelAndView.addObject("errorMsg", "验证码错误.");
 			return modelAndView;
 		}
 		
