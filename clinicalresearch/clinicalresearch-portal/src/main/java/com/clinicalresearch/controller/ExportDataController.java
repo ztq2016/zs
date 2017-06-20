@@ -53,8 +53,9 @@ public class ExportDataController {
 	
 	@RequestMapping("/saveFile")
 	@ResponseBody
-	public void saveFile(@RequestBody Map<String,Object> map) {
-		createFileService.createFile(map.get("userId").toString(), map.get("fileContent").toString());
+	public void saveFile(HttpServletRequest request, @RequestBody Map<String,Object> map) {
+		String userId = (String)request.getSession().getAttribute("userId");
+		createFileService.createFile(userId, map.get("fileContent").toString());
 	}
 	
 	@RequestMapping("/deleteFile")
