@@ -34,35 +34,66 @@ function saveLayout(){
 	}
 	layouthistory = data;
 	//console.log(data);
-	/*$.ajax({  
+	$.ajax({  
 		type: "POST",  
-		url: "/build/saveLayout",  
+		url: "saveLayout",  
 		data: { layout: $('.demo').html() },  
 		success: function(data) {
 			//updateButtonsVisibility();
 		}
-	});*/
+	});
 }
 
 function downloadLayout(){
 	
 	$.ajax({  
 		type: "POST",  
-		url: "/build/downloadLayout",  
-		data: { layout: $('#download-layout').html() },  
-		success: function(data) { window.location.href = '/build/download'; }
+		url: "saveFile",  
+		contentType: 'application/json',
+		dataType:'json',
+		data: JSON.stringify({ 'fileContent': $('#download-layout').html() }),  
+		success: function(data) { 
+			//window.location.href = '/build/download'; 
+			$("#save_btn_close").click();
+			}
 	});
 }
 
 function downloadHtmlLayout(){
 	$.ajax({  
 		type: "POST",  
-		url: "/build/downloadLayout",  
-		data: { layout: $('#download-layout').html() },  
-		success: function(data) { window.location.href = '/build/downloadHtml'; }
+		url: "querydownlist",  
+		contentType: 'application/json',
+		dataType:'json',
+		data:'',    
+		success: function(arr) { 
+			var obj=$("#shareModal .modal-body>ul");
+			var str='';
+			$.each(arr,function(index,data){
+				str+='<li><span class="filename">'+data.exportName+'</span><a data-id="'+data.fileId+'" class="downBtn">下载</a><a data-id="'+data.fileId+'" class="delBtn">删除</a></li>'
+			});
+			obj.html(str);
+		}
 	});
 }
-
+$(".downBtn").live("click",function(){
+	var fileId=$(this).attr("data-id");
+	
+	window.location.href='downfile?fileId='+fileId;
+})
+$(".delBtn").live("click",function(){
+	var fileId=$(this).attr("data-id");
+	$.ajax({  
+		type: "POST",  
+		url: "deleteFile",  
+		contentType: 'application/json',
+		dataType:'json',
+		data:JSON.stringify({"fileId":fileId}),    
+		success: function(arr) { 
+			downloadHtmlLayout();
+		}
+	});
+})
 function undoLayout() {
 	var data = layouthistory;
 	//console.log(data);
@@ -460,6 +491,10 @@ $(document).ready(function() {
 		stopsave++;
 		if (redoLayout()) initContainer();
 		stopsave--;
+	});
+	$("#getDownList").click(function(){
+		downloadHtmlLayout();
+		//return false
 	});
 	removeElm();
 	gridSystemGenerator();

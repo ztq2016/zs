@@ -61,8 +61,8 @@
               <button type="button" class="btn btn-blank" id="sourcepreview"><i class="fa fa-eye"></i>预览</button>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-blank" data-target="#downloadModal" rel="/build/downloadModal" role="button" data-toggle="modal"><i class="fa fa-download"></i>下载</button>
-              <button class="btn btn-blank" href="/share/index" role="button" data-toggle="modal" data-target="#shareModal"><i class="fa fa-save"></i>保存</button>
+              <button type="button" class="btn btn-blank" data-target="#shareModal" rel="/build/downloadModal" role="button" data-toggle="modal" id="getDownList"><i class="fa fa-download"></i>下载</button>
+              <button class="btn btn-blank" href="/share/index" role="button" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-save"></i>保存</button>
               <button class="btn btn-blank" href="#clear" id="clear"><i class="fa fa-trash "></i>清空</button>
             </div>
             <div class="btn-group">
@@ -1146,10 +1146,10 @@
 </div>
 <div class="modal hide fade" role="dialog" id="downloadModal">
   <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-    <h3>下载</h3>
+    <h3>保存</h3>
   </div>
   <div class="modal-body">
-    <p>已在下面生成干净的HTML, 可以复制代码粘贴到你的项目.</p>
+    <p>已在下面生成干净的HTML, 可以上传至服务器.</p>
     <div class="btn-group">
       <button type="button" id="fluidPage" class="active btn btn-info"><i class="icon-fullscreen icon-white"></i> 自适应宽度</button>
       <button type="button" class="btn btn-info" id="fixedPage"><i class="icon-screenshot icon-white"></i> 固定宽度</button>
@@ -1160,13 +1160,20 @@
       <textarea></textarea>
     </p>
   </div>
-  <div class="modal-footer"> <a class="btn" data-dismiss="modal">关闭</a> </div>
+  <div class="modal-footer"> <a class="btn" data-dismiss="modal" id="save_btn_close">关闭</a> <a class="btn" data-dismiss="modal" id="download">保存</a></div>
 </div>
 <div class="modal hide fade" role="dialog" id="shareModal">
   <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-    <h3>保存</h3>
+    <h3>下载</h3>
   </div>
-  <div class="modal-body">保存成功</div>
+  <div class="modal-body">
+   <h4>文件列表</h4>
+   <ul>
+    <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
+     <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
+      <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
+   </ul>
+  </div>
   <div class="modal-footer"> <a class="btn" data-dismiss="modal">Close</a> </div>
 </div>
 <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;margin-left:-460px;width: noset;">

@@ -61,7 +61,7 @@
                     <input type="password" class="form-control" placeholder="真实姓名" required="" name="realName">
                 </div>
                 <img src="jcaptcha.jpg" id="img"/ onclick=" document.location.reload();" title="点击刷新验证码" alt="图形验证码"> 
-					<input type="text" name="jcaptcha" value="" id="jcaptcha" />
+					<input type="text" name="captcha" value="" id="jcaptcha" />
                 <div class="form-group text-left">
                     <div class="checkbox i-checks">
                         <label class="no-padding">
