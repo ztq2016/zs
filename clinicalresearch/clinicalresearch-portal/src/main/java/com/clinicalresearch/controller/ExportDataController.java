@@ -156,7 +156,7 @@ public class ExportDataController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="querydownlist",method=RequestMethod.POST,consumes="application/json")
+	@RequestMapping(value="/querydownlist",method=RequestMethod.POST,consumes="application/json")
 	@ResponseBody
 	public Object queryDownList(HttpServletRequest request) {
 		String userId = (String)request.getSession().getAttribute("userId");
@@ -169,7 +169,7 @@ public class ExportDataController {
 	 * @param fileId
 	 * @return
 	 */
-	@RequestMapping(value="downfile",method=RequestMethod.GET)
+	@RequestMapping(value="/downfile",method=RequestMethod.GET)
 	public ResponseEntity<byte[]> downFile(@RequestParam(required=true)Integer fileId) {
 		FileMessage filePathByFileId = dataExportService.getFilePathByFileId(fileId);
 		if (filePathByFileId == null) {
