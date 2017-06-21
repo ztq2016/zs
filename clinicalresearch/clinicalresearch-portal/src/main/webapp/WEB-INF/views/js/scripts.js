@@ -34,14 +34,14 @@ function saveLayout(){
 	}
 	layouthistory = data;
 	//console.log(data);
-	$.ajax({  
+	/*$.ajax({  
 		type: "POST",  
 		url: "saveLayout",  
 		data: { layout: $('.demo').html() },  
 		success: function(data) {
 			//updateButtonsVisibility();
 		}
-	});
+	});*/
 }
 
 function downloadLayout(){
@@ -70,7 +70,7 @@ function downloadHtmlLayout(){
 			var obj=$("#shareModal .modal-body>ul");
 			var str='';
 			$.each(arr,function(index,data){
-				str+='<li><span class="filename">'+data.exportName+'</span><a data-id="'+data.fileId+'" class="downBtn">下载</a><a data-id="'+data.fileId+'" class="delBtn">删除</a></li>'
+				str+='<li><span class="filename">'+data.exportName+'</span><a data-id="'+data.fileId+'" class="delBtn">删除</a><a data-id="'+data.fileId+'" class="downBtn">下载</a></li>'
 			});
 			obj.html(str);
 		}
@@ -356,13 +356,14 @@ function initContainer(){
 	configurationElm();
 }
 $(document).ready(function() {
-	CKEDITOR.disableAutoInline = true;
-	restoreData();
-	var contenthandle = CKEDITOR.replace( 'contenteditor' ,{
+	//CKEDITOR.disableAutoInline = true;
+	//restoreData();
+	/*var contenthandle = CKEDITOR.replace( 'contenteditor' ,{
 		language: 'zh-cn',
 		contentsCss: ['css/bootstrap-combined.min.css'],
 		allowedContent: true
-	});
+	});*/
+	 $('#editbox').editable({inlineMode: false, alwaysBlank: true});
 	$("body").css("min-height", $(window).height() - 90);
 	$(".demo").css("min-height", $(window).height() - 160);
 	$(".sidebar-nav .lyrow").draggable({
@@ -415,11 +416,12 @@ $(document).ready(function() {
 		e.preventDefault();
 		currenteditor = $(this).parent().parent().find('.view');
 		var eText = currenteditor.html();
-		contenthandle.setData(eText);
+		//contenthandle.setData(eText);
+		$("#editorModal .froala-element").html(eText);
 	});
 	$("#savecontent").click(function(e) {
 		e.preventDefault();
-		currenteditor.html(contenthandle.getData());
+		currenteditor.html($("#editorModal .froala-element").html());
 	});
 	$("[data-target=#downloadModal]").click(function(e) {
 		e.preventDefault();

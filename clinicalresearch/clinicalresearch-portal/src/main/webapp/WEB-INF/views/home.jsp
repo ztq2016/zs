@@ -23,6 +23,8 @@
 <link href="css/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
 <link href="css/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>
 <link href="css/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+<link href="ckeditor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="ckeditor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
@@ -38,9 +40,19 @@
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="ckeditor/config.js"></script>
+<!-- <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/config.js"></script> -->
 <script type="text/javascript" src="js/scripts.js"></script>
+<style type="text/css">
+#shareModal li{
+line-height:30px;
+}
+	.downBtn,.delBtn{
+	display: inline-block;
+    float: right;
+    padding: 0px 5px;
+    margin: 0px 5px;}
+</style>
 </head>
 <body style="min-height: 660px; cursor: auto;" class="edit">
 <div class="navbar navbar-inverse navbar-fixed-top row border-bottom">
@@ -1133,49 +1145,76 @@
   <!--/row--> 
 </div>
 <!--/.fluid-container--> 
-<div class="modal hide fade" role="dialog" id="editorModal">
-  <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-    <h3>编辑</h3>
+<div class="modal inmodal hide fade" id="editorModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog" style="margin:0px;">
+          <div class="modal-content animated fadeIn">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="text-left">编辑</h4>
+              </div>
+              <div class="modal-body" style="padding:0px;">
+                  <section id="editor">
+      <div id='editbox' style="margin-top: 30px;">
+          <img class="fr-fir" src="ckeditor/img/old_clock.jpg" alt="Old Clock" width="300"/>
+
+          <h1>Click and edit</h1>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis diam in odio iaculis blandit. Nunc eu mauris sit amet purus viverra gravida ut a dui. Vivamus nec rutrum augue, pharetra faucibus purus. Maecenas non orci sagittis, vehicula lorem et, dignissim nunc. Suspendisse suscipit, diam non varius facilisis, enim libero tincidunt magna, sit amet iaculis eros libero sit amet eros. Vestibulum a rhoncus felis. Nam lacus nulla, consequat ac lacus sit amet, accumsan pellentesque risus. Aenean viverra mi at urna mattis fermentum. Curabitur porta metus in tortor elementum, in semper nulla ullamcorper. Vestibulum mattis tempor tortor quis gravida. In rhoncus risus nibh. Nullam condimentum dapibus massa vel fringilla. Sed hendrerit sed est quis facilisis. Ut sit amet nibh sem. Pellentesque imperdiet mollis libero.</p>
+
+          <p><a href="http://google.com" title="Aenean sed hendrerit">Aenean sed hendrerit</a> velit. Nullam eu mi dolor. Maecenas et erat risus. Nulla ac auctor diam, non aliquet ante. Fusce ullamcorper, ipsum id tempor lacinia, sem tellus malesuada libero, quis ornare sem massa in orci. Sed dictum dictum tristique. Proin eros turpis, ultricies eu sapien eget, ornare rutrum ipsum. Pellentesque eros nisl, ornare nec ipsum sed, aliquet sollicitudin erat. Nulla tincidunt porta vehicula.</p>
+
+          <p>Nullam laoreet imperdiet orci ac euismod. Curabitur vel lectus nisi. Phasellus accumsan aliquet augue, eu rutrum tellus iaculis in. Nunc viverra ultrices mollis. Curabitur malesuada nunc massa, ut imperdiet arcu lobortis sed. Cras ac arcu mauris. Maecenas id lectus nisl. Donec consectetur scelerisque quam at ultricies. Nam quis magna iaculis, condimentum metus ut, elementum metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus id tempus nisi.</p>
+      </div>
+  </section>
+              </div>
+              <div class="modal-footer"> 
+	              <a id="savecontent" class="btn btn-primary" data-dismiss="modal">保存</a> 
+	              <a class="btn" data-dismiss="modal">关闭</a>
+               </div>
+          </div>
+      </div>
   </div>
-  <div class="modal-body">
-    <p>
-      <textarea id="contenteditor"></textarea>
-    </p>
+<div class="modal inmodal hide fade" id="downloadModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog" style="margin:0px;">
+          <div class="modal-content animated fadeIn">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="text-left">保存当前布局</h4>
+                  <small>已在下面生成干净的HTML, 可以上传至服务器.</small>
+              </div>
+              <div class="modal-body" style="padding:0px;">
+                  <p>
+                   <textarea style="border: 0px; background: transparent;"></textarea>
+                  </p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal"  id="save_btn_close">关闭</button>
+                  <button type="button" class="btn btn-primary" id="download">保存</button>
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="modal-footer"> <a id="savecontent" class="btn btn-primary" data-dismiss="modal">保存</a> <a class="btn" data-dismiss="modal">关闭</a> </div>
-</div>
-<div class="modal hide fade" role="dialog" id="downloadModal">
-  <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-    <h3>保存</h3>
+<div class="modal inmodal hide fade" id="shareModal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog" style="margin:0px;">
+          <div class="modal-content animated fadeIn">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="text-left">下载</h4>
+                  	<small>
+                  	文件列表
+                  	</small>
+              </div>
+              <div class="modal-body">
+                 <ul>
+				   
+				   </ul>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="modal-body">
-    <p>已在下面生成干净的HTML, 可以上传至服务器.</p>
-    <div class="btn-group">
-      <button type="button" id="fluidPage" class="active btn btn-info"><i class="icon-fullscreen icon-white"></i> 自适应宽度</button>
-      <button type="button" class="btn btn-info" id="fixedPage"><i class="icon-screenshot icon-white"></i> 固定宽度</button>
-    </div>
-    <br>
-    <br>
-    <p>
-      <textarea></textarea>
-    </p>
-  </div>
-  <div class="modal-footer"> <a class="btn" data-dismiss="modal" id="save_btn_close">关闭</a> <a class="btn" data-dismiss="modal" id="download">保存</a></div>
-</div>
-<div class="modal hide fade" role="dialog" id="shareModal">
-  <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-    <h3>下载</h3>
-  </div>
-  <div class="modal-body">
-   <h4>文件列表</h4>
-   <ul>
-    <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
-     <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
-      <li><span>2016-6-21网页布局.html</span><button>下载</button></li>
-   </ul>
-  </div>
-  <div class="modal-footer"> <a class="btn" data-dismiss="modal">Close</a> </div>
-</div>
 <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;margin-left:-460px;width: noset;">
                                 <div class="modal-dialog modal-lg" style="margin: 0px auto;">
                                     <div class="modal-content">
@@ -1374,6 +1413,17 @@
         $('.fancybox').fancybox();
         });
 </script>
-
+  <script src="ckeditor/js/froala_editor.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../js/froala_editor_ie8.min.js"></script>
+  <![endif]-->
+  <script src="ckeditor/js/plugins/tables.min.js"></script>
+  <script src="ckeditor/js/plugins/lists.min.js"></script>
+  <script src="ckeditor/js/plugins/colors.min.js"></script>
+  <script src="ckeditor/js/plugins/media_manager.min.js"></script>
+  <script src="ckeditor/js/plugins/font_family.min.js"></script>
+  <script src="ckeditor/js/plugins/font_size.min.js"></script>
+  <script src="ckeditor/js/plugins/block_styles.min.js"></script>
+  <script src="ckeditor/js/plugins/video.min.js"></script>
 </body>
 </html>
