@@ -50,6 +50,12 @@ public class ExportDataController {
 	
 	private static final Gson gson = new Gson();
 	
+	@RequestMapping("saveImg")
+	@ResponseBody
+	public Object saveImg() {
+		return null;
+	}
+	
 	
 	@RequestMapping("/saveFile")
 	@ResponseBody
