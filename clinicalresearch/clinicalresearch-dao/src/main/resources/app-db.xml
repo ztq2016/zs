@@ -202,4 +202,9 @@
 			value="com.clinicalresearch.dao.manager.RolesPowersExtendMapper"/>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="imgFileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.clinicalresearch.dao.manager.ImgFileMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 </beans>
