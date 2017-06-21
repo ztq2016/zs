@@ -45,7 +45,7 @@ function saveLayout(){
 }
 
 function downloadLayout(){
-	var bootstarpCSS='<link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" rel="stylesheet">';
+	var bootstarpCSS='<link href="https://github.com/ztq2016/zs/blob/master/clinicalresearch/clinicalresearch-portal/src/main/webapp/WEB-INF/views/css/bootstrap.min.css" rel="stylesheet"><link href="https://github.com/ztq2016/zs/blob/master/clinicalresearch/clinicalresearch-portal/src/main/webapp/WEB-INF/views/css/bootstrap-combined.min.css" rel="stylesheet"><link href="https://github.com/ztq2016/zs/blob/master/clinicalresearch/clinicalresearch-portal/src/main/webapp/WEB-INF/views/css/style.css" rel="stylesheet">';
 	var header='<!DOCTYPE html><html><head><title>A+</title>'+bootstarpCSS+'</head><body>';
 	var footer='</body></html>';
 	var body=$('#download-layout').html();
