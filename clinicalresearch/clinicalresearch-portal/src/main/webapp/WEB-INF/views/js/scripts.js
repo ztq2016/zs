@@ -45,13 +45,17 @@ function saveLayout(){
 }
 
 function downloadLayout(){
-	
+	var bootstarpCSS='<link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" rel="stylesheet">';
+	var header='<!DOCTYPE html><html><head><title>A+</title>'+bootstarpCSS+'</head><body>';
+	var footer='</body></html>';
+	var body=$('#download-layout').html();
+	var html=header+body+footer;
 	$.ajax({  
 		type: "POST",  
 		url: "saveFile",  
 		contentType: 'application/json',
 		dataType:'json',
-		data: JSON.stringify({ 'fileContent': $('#download-layout').html() }),  
+		data: JSON.stringify({ 'fileContent':html  }),  
 		success: function(data) { 
 			//window.location.href = '/build/download'; 
 			$("#save_btn_close").click();
@@ -314,6 +318,7 @@ function downloadLayoutSrc() {
 			["data-slide"]
 		]
 	});
+	
 	$("#download-layout").html(formatSrc);
 	$("#downloadModal textarea").empty();
 	$("#downloadModal textarea").val(formatSrc)

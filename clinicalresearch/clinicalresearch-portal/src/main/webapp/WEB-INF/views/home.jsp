@@ -1146,7 +1146,7 @@ line-height:30px;
 </div>
 <!--/.fluid-container--> 
 <div class="modal inmodal hide fade" id="editorModal" tabindex="-1" role="dialog"  aria-hidden="true">
-          <div class="modal-dialog" style="margin:0px;">
+          <div class="modal-dialog" style="margin:0px;width:100%;">
           <div class="modal-content animated fadeIn">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -1154,7 +1154,7 @@ line-height:30px;
               </div>
               <div class="modal-body" style="padding:0px;">
                   <section id="editor">
-      <div id='editbox' style="margin-top: 30px;">
+      <div id='editbox'>
           <img class="fr-fir" src="ckeditor/img/old_clock.jpg" alt="Old Clock" width="300"/>
 
           <h1>Click and edit</h1>
